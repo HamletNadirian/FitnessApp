@@ -1,0 +1,74 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerLowest"
+    app:strokeColor="?attr/colorPrimary"
+    app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvDayNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1-й День"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tvWorkoutCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17 упражнений"
+                    android:textSize="14sp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tvDayStatus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Осталось"
+                            android:textSize="14sp"
+                            android:textColor="?attr/colorOutline" />
+
+                        <ImageView
+                            android:id="@+id/ivStatus"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_check"
+                            android:visibility="gone"
+                            app:tint="?attr/colorPrimary" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:text="НАЧАЛО"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:visibility="gone"/>
+        </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

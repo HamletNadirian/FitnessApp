@@ -1,0 +1,51 @@
+[versions]
+agp = "8.9.2"
+kotlin = "2.0.21"
+coreKtx = "1.16.0"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+activity = "1.10.1"
+constraintlayout = "2.2.1"
+glide = "4.16.0"
+room = "2.6.1"  # или ваша версия Room
+lifecycle = "2.7.0"          # или ваша версия
+coroutines = "1.8.0"
+navigationFragmentKtx = "2.9.0"
+navigationUiKtx = "2.9.0"         #
+navigation = "2.7.7"
+androidx-splashscreen = "1.0.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycle" }
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui-ktx       = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-splashscreen" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kapt = { id = "org.jetbrains.kotlin.kapt" }
+androidx-navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }

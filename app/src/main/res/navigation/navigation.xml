@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/welcomeFragment">
+    <fragment
+        android:id="@+id/workoutFragment"
+        android:name="com.example.myapplication.ui.WorkoutFragment"
+        android:label="fragment_workout"
+        tools:layout="@layout/fragment_workout">
+        <argument
+            android:name="workoutId"
+            app:argType="integer" />
+        <argument
+            android:name="workout_lvl"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <action
+            android:id="@+id/action_workoutFragment_to_finishFragment"
+            app:destination="@id/finishFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dayFragment"
+        android:name="com.example.myapplication.ui.DayFragment"
+        android:label="fragment_day"
+        tools:layout="@layout/fragment_day" >
+        <action
+            android:id="@+id/action_dayFragment_to_workoutFragment"
+            app:destination="@id/workoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishFragment"
+        android:name="com.example.myapplication.ui.FinishFragment"
+        android:label="fragment_finish"
+        tools:layout="@layout/fragment_finish" >
+        <argument
+            android:name="workoutId"
+            app:argType="integer" />
+        <argument
+            android:name="workout_lvl"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <action
+            android:id="@+id/action_finishFragment_to_dayFragment"
+            app:destination="@id/dayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.myapplication.ui.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_dayFragment"
+            app:destination="@id/dayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.myapplication.data.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_dayFragment"
+            app:destination="@id/dayFragment"
+            app:popUpTo="@id/dayFragment" />
+    </fragment>
+
+</navigation>

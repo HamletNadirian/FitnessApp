@@ -1,0 +1,46 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:strokeColor="?attr/colorPrimary"
+    app:strokeWidth="1dp"
+    app:cardBackgroundColor="?attr/colorSurfaceVariant">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvposition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tvitem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📅 2025-05-30"
+            android:textSize="16sp"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvlvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🏋️‍♂️ Тренировка: 1   ⭐ Уровень: Средний"
+            android:textSize="15sp"
+            android:textColor="?attr/colorSecondary"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,100 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3FA"
+    tools:context=".ui.WorkoutFragment">
+
+    <TextView
+        android:id="@+id/textExerciseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Название упражнения"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <ImageView
+        android:id="@+id/imageAnimation"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="fitCenter"
+        android:contentDescription="Анимация упражнения"
+        app:layout_constraintTop_toBottomOf="@id/textExerciseName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/textTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:30"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/imageAnimation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/textProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Упражнение 1/3"
+        android:textSize="18sp"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        app:layout_constraintTop_toBottomOf="@id/textTimer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/controlsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/textProgress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp">
+
+        <ImageButton
+            android:id="@+id/buttonPrev"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Предыдущее упражнение"
+            android:src="@drawable/baseline_skip_previous_24" />
+
+        <ImageButton
+            android:id="@+id/buttonPause"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Пауза/Воспроизведение"
+            android:src="@drawable/baseline_pause_circle_24" />
+
+        <ImageButton
+            android:id="@+id/buttonSkip"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Следующее упражнение"
+            android:src="@drawable/baseline_skip_next_24" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

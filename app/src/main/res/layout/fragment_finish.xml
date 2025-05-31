@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".ui.FinishFragment">
+    <TextView
+        android:id="@+id/tvEmoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🎉"
+        android:textSize="64sp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/tvCongratulations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Поздравляем!"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorPrimary"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvWorkoutCompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Тренировка успешно завершена!"
+        android:textSize="18sp"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/btnBackToList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Вернуться к списку тренировок"
+        android:textColor="?attr/colorOnPrimary"
+        android:backgroundTint="?attr/colorPrimary"
+        android:padding="12dp"/>
+
+
+</LinearLayout>
