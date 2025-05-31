@@ -26,9 +26,9 @@ class WorkoutFragment : Fragment() {
     private lateinit var textExerciseName: TextView
     private lateinit var textTimer: TextView
     private lateinit var textProgress: TextView // Added to show progress
-    private lateinit var buttonPause: ImageButton
-    private lateinit var buttonSkip: ImageButton
-    private lateinit var buttonPrev: ImageButton
+    private lateinit var buttonPause: ImageView
+    private lateinit var buttonSkip: ImageView
+    private lateinit var buttonPrev: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,8 +116,8 @@ class WorkoutFragment : Fragment() {
 
         // Обновление кнопки паузы/воспроизведения
         buttonPause.setImageResource(
-            if (state.isPlaying) R.drawable.baseline_pause_circle_24
-            else R.drawable.baseline_play_circle_24
+            if (state.isPlaying) R.drawable.pause_circle_svgrepo_com
+            else R.drawable.play_circle_svgrepo_com
         )
     }
 }
