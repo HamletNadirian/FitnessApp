@@ -1,31 +1,30 @@
 package com.example.myapplication.data
 
 import android.os.CountDownTimer
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import android.speech.tts.TextToSpeech
 import com.example.myapplication.R
 import com.example.myapplication.domain.WorkoutStateListener
 import com.example.myapplication.domain.WorkoutViewState
-import com.example.myapplication.ui.WorkoutFragmentDirections
 
 // WorkoutEngine.kt - ядро логики тренировки
 class WorkoutEngine(private val workoutId: Int) : WorkoutController {
-   // )
+    // )
 
     private val workoutExercises = mapOf(
         1 to listOf(
-            Exercise("Сплит приседания со скамьи", 3, R.drawable.split_squats_from_bench),
-            Exercise("Приседания", 3, R.drawable.squat_animation),
+            Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench),
+            Exercise("Squat", 3, R.drawable.squat_animation),
             Exercise("Gluteal bridge", 3, R.drawable.gluteal_bridge)
         ),
         2 to listOf(
-            Exercise("Отжимания", 3, R.drawable.squat_animation),
-            Exercise("Планка", 3, R.drawable.gluteal_bridge),
-            Exercise("Скручивания", 3, R.drawable.split_squats_from_bench)
+            Exercise("Squat", 3, R.drawable.squat_animation),
+            Exercise("Gluteal bridge", 3, R.drawable.gluteal_bridge),
+            Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench)
         ),
         3 to listOf(
-            Exercise("Берпи", 3, R.drawable.squat_animation),
-            Exercise("Выпады", 3, R.drawable.split_squats_from_bench),
-            Exercise("Прыжки на скакалке", 3, R.drawable.squat_animation)
+            Exercise("Squat", 3, R.drawable.squat_animation),
+            Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench),
+            Exercise("Squat", 3, R.drawable.squat_animation)
         )
     )
     private val exercises: List<Exercise> = workoutExercises[workoutId] ?: workoutExercises[1]!!
@@ -53,9 +52,11 @@ class WorkoutEngine(private val workoutId: Int) : WorkoutController {
 
         val exercise = exercises[currentIndex]
 
+
         // Если это первый запуск упражнения, устанавливаем полное время
         if (remainingTime <= 0) {
             remainingTime = exercise.durationSeconds
+
         }
 
         startTimer(remainingTime)
@@ -78,8 +79,7 @@ class WorkoutEngine(private val workoutId: Int) : WorkoutController {
                 if (currentIndex >= exercises.size) {
 
                     stateListener?.onWorkoutComplete()
-                }
-                else{
+                } else {
                     startExercise()
                 }
             }
@@ -119,8 +119,7 @@ class WorkoutEngine(private val workoutId: Int) : WorkoutController {
         currentIndex++
         if (currentIndex >= exercises.size) {
             stateListener?.onWorkoutComplete()
-        }
-        else{
+        } else {
             startExercise()
         }
     }

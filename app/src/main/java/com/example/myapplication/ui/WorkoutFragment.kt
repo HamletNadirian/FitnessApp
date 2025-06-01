@@ -1,6 +1,8 @@
 package com.example.myapplication.ui
 
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +17,12 @@ import com.example.myapplication.R
 import com.example.myapplication.domain.WorkoutViewModel
 import com.example.myapplication.domain.WorkoutViewModelFactory
 import com.example.myapplication.domain.WorkoutViewState
+import java.util.Locale
 
 class WorkoutFragment : Fragment() {
 
     private var workoutId: Int = 0
     private var workoutLevel: Int = 1
-
     private lateinit var viewModel: WorkoutViewModel
     private lateinit var imageView: ImageView
     private lateinit var textExerciseName: TextView
@@ -29,6 +31,9 @@ class WorkoutFragment : Fragment() {
     private lateinit var buttonPause: ImageView
     private lateinit var buttonSkip: ImageView
     private lateinit var buttonPrev: ImageView
+    private var tts: TextToSpeech? = null
+    private var lastSpokenExerciseName: String? = null
+    private var isTtsReady = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +46,7 @@ class WorkoutFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?{
+    ): View? {
 
         val args = WorkoutFragmentArgs.fromBundle(requireArguments())
         workoutId = args.workoutId
@@ -54,8 +59,6 @@ class WorkoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-      //val workoutId = WorkoutFragmentArgs.fromBundle(requireArguments()).workoutId
-
         // Use custom ViewModelFactory to create ViewModel with workoutId
         val factory = WorkoutViewModelFactory(workoutId)
         viewModel = ViewModelProvider(this, factory)[WorkoutViewModel::class.java]
@@ -64,7 +67,7 @@ class WorkoutFragment : Fragment() {
         imageView = view.findViewById(R.id.imageAnimation)
         textExerciseName = view.findViewById(R.id.textExerciseName)
         textTimer = view.findViewById(R.id.textTimer)
-        textProgress = view.findViewById(R.id.textProgress) // You'll need to add this to your layout
+        textProgress = view.findViewById(R.id.textProgress)
         buttonPause = view.findViewById(R.id.buttonPause)
         buttonSkip = view.findViewById(R.id.buttonSkip)
         buttonPrev = view.findViewById(R.id.buttonPrev)
@@ -72,16 +75,52 @@ class WorkoutFragment : Fragment() {
         // Настройка UI контроллеров
         setupControllers()
 
+        tts = TextToSpeech(requireContext()) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val result = tts?.setLanguage(Locale.ENGLISH)
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Log.e("TTS", "Language not supported")
+                } else {
+                    Log.d("TTS", "TTS initialized successfully")
+                    isTtsReady = true
+                    // Озвучить первое упражнение, если оно уже загружено
+                    viewModel.viewState.value?.let { state ->
+                        if (state.exerciseName.isNotEmpty() && lastSpokenExerciseName == null) {
+                            speakOut(state.exerciseName)
+                            lastSpokenExerciseName = state.exerciseName
+                        }
+                    }
+                }
+            } else {
+                Log.e("TTS", "Initialization failed")
+            }
+        }
+
         // Наблюдение за состоянием тренировки
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
             updateUI(state)
+
         }
         viewModel.navigateToFinish.observe(viewLifecycleOwner) { shouldNavigate ->
             if (shouldNavigate) {
-                val action = WorkoutFragmentDirections.actionWorkoutFragmentToFinishFragment(workoutId, workoutLevel)
+                val action = WorkoutFragmentDirections.actionWorkoutFragmentToFinishFragment(
+                    workoutId,
+                    workoutLevel
+                )
                 findNavController().navigate(action)
             }
         }
+    }
+
+    private fun speakOut(text: String) {
+        tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        tts?.stop()
+        tts?.shutdown()
+        tts = null
     }
 
     private fun setupControllers() {
@@ -99,6 +138,11 @@ class WorkoutFragment : Fragment() {
     }
 
     private fun updateUI(state: WorkoutViewState) {
+        if (state.exerciseName != lastSpokenExerciseName && state.exerciseName.isNotEmpty()&& isTtsReady) {
+            speakOut(state.exerciseName)
+            lastSpokenExerciseName = state.exerciseName
+        }
+
         // Обновление названия упражнения
         textExerciseName.text = state.exerciseName
 
