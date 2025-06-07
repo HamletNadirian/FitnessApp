@@ -102,7 +102,7 @@ class DayFragment : Fragment(), OnItemClickListener {
         when (fragmentClass) {
             WorkoutFragment::class -> {
                 // Создаём action с аргументом workoutId
-                val action = DayFragmentDirections.actionDayFragmentToWorkoutFragment(workoutId, currentSelectedLevel)
+                val action = DayFragmentDirections.actionDayFragmentToWorkoutPreviewFragment(workoutId, currentSelectedLevel)
                 findNavController().navigate(action)
             }
 

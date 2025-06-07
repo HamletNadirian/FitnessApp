@@ -9,7 +9,6 @@ import com.example.myapplication.R
 
 
 class SentItemsFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

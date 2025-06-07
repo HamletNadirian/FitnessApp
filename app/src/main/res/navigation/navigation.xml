@@ -27,8 +27,8 @@
         android:label="fragment_day"
         tools:layout="@layout/fragment_day" >
         <action
-            android:id="@+id/action_dayFragment_to_workoutFragment"
-            app:destination="@id/workoutFragment" />
+            android:id="@+id/action_dayFragment_to_workoutPreviewFragment"
+            app:destination="@id/workoutPreviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/finishFragment"
@@ -64,6 +64,22 @@
             android:id="@+id/action_historyFragment_to_dayFragment"
             app:destination="@id/dayFragment"
             app:popUpTo="@id/dayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutPreviewFragment"
+        android:name="com.example.myapplication.ui.WorkoutPreviewFragment"
+        android:label="fragment_workout_preview"
+        tools:layout="@layout/fragment_workout_preview" >
+        <action
+            android:id="@+id/action_workoutPreviewFragment_to_workoutFragment"
+            app:destination="@id/workoutFragment" />
+        <argument
+            android:name="workoutId"
+            app:argType="integer" />
+
+        <argument
+            android:name="workoutLevel"
+            app:argType="integer" />
     </fragment>
 
 </navigation>
