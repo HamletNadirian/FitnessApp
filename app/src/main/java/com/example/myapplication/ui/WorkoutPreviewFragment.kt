@@ -13,7 +13,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.Exercise
 import com.example.myapplication.data.WorkoutEngine
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -74,15 +73,15 @@ class WorkoutPreviewFragment : Fragment() {
         recyclerView.adapter = exercisePreviewAdapter
 
         // Кнопки
-        val btnStartAgain = view.findViewById<Button>(R.id.btnStartAgain)
-        val btnContinue = view.findViewById<Button>(R.id.btnContinue)
+      //  val btnStartAgain = view.findViewById<Button>(R.id.btnStartAgain)
+        val btnContinue = view.findViewById<Button>(R.id.btnStartExercises)
 
-        btnStartAgain.setOnClickListener {
+      /*  btnStartAgain.setOnClickListener {
             // Переход к тренировке с самого начала
             val action = WorkoutPreviewFragmentDirections
                 .actionWorkoutPreviewFragmentToWorkoutFragment(workoutId, workoutLevel)
             findNavController().navigate(action)
-        }
+        }*/
 
         btnContinue.setOnClickListener {
             // Здесь можно добавить логику для продолжения с места остановки
