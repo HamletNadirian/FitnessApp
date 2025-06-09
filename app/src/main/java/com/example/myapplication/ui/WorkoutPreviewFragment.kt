@@ -43,7 +43,7 @@ class WorkoutPreviewFragment : Fragment() {
         val workoutId = args.workoutId
         val workoutLevel = args.workoutLevel
         // Получаем упражнения из WorkoutEngine
-        val exercises = WorkoutEngine.getExercisesForWorkout(workoutId)
+        val exercises = WorkoutEngine.getExercisesForWorkout(workoutId, workoutLevel)
 
         // Настройка заголовка
         val titleText = view.findViewById<TextView>(R.id.tvWorkoutTitle)
@@ -64,7 +64,7 @@ class WorkoutPreviewFragment : Fragment() {
         val totalSeconds = exercises.sumOf { it.durationSeconds }
         val minutes = totalSeconds / 60
         val seconds = totalSeconds % 60
-        totalTime.text = "${minutes} мин.\nВремя"
+        totalTime.text = "${minutes} Минут. ${seconds} Секунд. \nВремя"
 
         // Настройка RecyclerView с упражнениями
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerExercises)

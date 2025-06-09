@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.WorkoutEngine
 
 // Step 6: Update WorkoutViewModel to accept workout ID
-class WorkoutViewModel(private val workoutId: Int) : ViewModel() {
-    private val workoutEngine = WorkoutEngine(workoutId)
+class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) : ViewModel() {
+    private val workoutEngine = WorkoutEngine(workoutId,workoutLvl)
 
 
     private val _navigateToFinish = MutableLiveData<Boolean>()

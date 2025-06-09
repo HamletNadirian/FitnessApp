@@ -7,7 +7,7 @@ import com.example.myapplication.domain.WorkoutStateListener
 import com.example.myapplication.domain.WorkoutViewState
 
 // WorkoutEngine.kt - ядро логики тренировки
-class WorkoutEngine(private val workoutId: Int) : WorkoutController {
+class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : WorkoutController {
 
    /*  val workoutExercises = mapOf(
         1 to listOf(
@@ -26,7 +26,8 @@ class WorkoutEngine(private val workoutId: Int) : WorkoutController {
             Exercise("Squat", 3, R.drawable.squat_animation)
         )
     )*/
-   private val exercises: List<Exercise> = workoutExercises[workoutId] ?: workoutExercises[1]!!
+   private val exercises: List<Exercise> =
+       workoutExercises[WorkoutKey( workoutId,workoutLvl)] ?: workoutExercises[WorkoutKey(1, 1)]!!
 
     private var currentIndex = 0
     private var remainingTime = 0
@@ -147,26 +148,26 @@ class WorkoutEngine(private val workoutId: Int) : WorkoutController {
     }
     companion object {
         val workoutExercises = mapOf(
-            1 to listOf(
+            WorkoutKey(1,1) to listOf(
                 Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench),
                 Exercise("Squat", 3, R.drawable.squat_animation),
                 Exercise("Gluteal bridge", 3, R.drawable.gluteal_bridge)
             ),
-            2 to listOf(
+            WorkoutKey(1,2) to listOf(
                 Exercise("Squat", 3, R.drawable.squat_animation),
                 Exercise("Gluteal bridge", 3, R.drawable.gluteal_bridge),
                 Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench)
             ),
-            3 to listOf(
+            WorkoutKey(1,2) to listOf(
                 Exercise("Squat", 3, R.drawable.squat_animation),
                 Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench),
                 Exercise("Squat", 3, R.drawable.squat_animation)
             )
         )
 
-        fun getExercisesForWorkout(workoutId: Int): List<Exercise> {
-
-            return workoutExercises[workoutId] ?: workoutExercises[1]!!
+        fun getExercisesForWorkout(workoutId: Int, workoutLvl: Int): List<Exercise> {
+            return workoutExercises[WorkoutKey(workoutLvl, workoutId)]
+                ?: workoutExercises[WorkoutKey(1, 1)]!!
         }
     }
 }

@@ -107,7 +107,7 @@
                     android:id="@+id/tvTotalTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5 мин.\nВремя"
+                    android:text="5 Минут. 30 Секунд \nВремя"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"

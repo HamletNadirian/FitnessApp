@@ -35,8 +35,8 @@ class DayFragment : Fragment(), OnItemClickListener {
         FragmentItem("3 - й День 2 Уровень", "10 Упражнения", WorkoutFragment::class, 3)
     )
     private val categories = listOf(
-        WorkoutLevel(1, "First Level", "For the first level", R.drawable.first, items),
-        WorkoutLevel(2, "Second Level", "For the second level", R.drawable.second, items2)
+        WorkoutLevel(1, "1", "For the first level", R.drawable.first, items),
+        WorkoutLevel(2, "2", "For the second level", R.drawable.second, items2)
     )
 
     override fun onCreateView(

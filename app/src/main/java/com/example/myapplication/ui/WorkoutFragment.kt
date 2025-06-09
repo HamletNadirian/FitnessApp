@@ -60,7 +60,7 @@ class WorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Use custom ViewModelFactory to create ViewModel with workoutId
-        val factory = WorkoutViewModelFactory(workoutId)
+        val factory = WorkoutViewModelFactory(workoutId,workoutLevel)
         viewModel = ViewModelProvider(this, factory)[WorkoutViewModel::class.java]
 
         // Инициализация UI компонентов
