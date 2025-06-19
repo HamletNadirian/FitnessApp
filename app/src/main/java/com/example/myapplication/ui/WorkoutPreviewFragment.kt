@@ -13,7 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.WorkoutEngine
+import com.example.myapplication.exercises.AllExercises
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WorkoutPreviewFragment : Fragment() {
@@ -43,7 +43,7 @@ class WorkoutPreviewFragment : Fragment() {
         val workoutId = args.workoutId
         val workoutLevel = args.workoutLevel
         // Получаем упражнения из WorkoutEngine
-        val exercises = WorkoutEngine.getExercisesForWorkout(workoutId, workoutLevel)
+        val exercises = AllExercises.getExercisesForWorkout(workoutId, workoutLevel)
 
         // Настройка заголовка
         val titleText = view.findViewById<TextView>(R.id.tvWorkoutTitle)

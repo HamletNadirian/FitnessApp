@@ -7,5 +7,7 @@ data class FragmentItem(
     val numberDay: String,
     val countExercise: String,
     val fragmentClass: KClass<out Fragment>,
-    var workoutId: Int // Add this field to identify specific workouts
+    var workoutId: Int, // Add this field to identify specific workouts
+ //   val workoutLvl: Int
+
 )

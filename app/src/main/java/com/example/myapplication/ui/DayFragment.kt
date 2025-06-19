@@ -25,15 +25,40 @@ class DayFragment : Fragment(), OnItemClickListener {
     private var currentSelectedLevel: Int = 1
 
     val items = listOf(
-        FragmentItem("1 - й День", "15 Упражнения", WorkoutFragment::class, 1),
-        FragmentItem("2 - й День", "12 Упражнения", WorkoutFragment::class, 2),
-        FragmentItem("3 - й День", "10 Упражнения", WorkoutFragment::class, 3)
+        FragmentItem("1 - й День", "4 Упражнения", WorkoutFragment::class, 1),
+        FragmentItem("2 - й День", "4 Упражнения", WorkoutFragment::class, 2),
+        FragmentItem("3 - й День", "4 Упражнения", WorkoutFragment::class, 3),
+        FragmentItem("4 - й День", "4 Упражнения", WorkoutFragment::class, 4),
+        FragmentItem("5 - й День", "4 Упражнения", WorkoutFragment::class, 5),
+        FragmentItem("6 - й День", "4 Упражнения", WorkoutFragment::class, 6),
+        FragmentItem("7 - й День", "4 Упражнения", WorkoutFragment::class, 7),
+        FragmentItem("8 - й День", "4 Упражнения", WorkoutFragment::class, 8),
+        FragmentItem("9 - й День", "4 Упражнения", WorkoutFragment::class, 9),
+        FragmentItem("10 - й День", "4 Упражнения", WorkoutFragment::class, 10),
+        FragmentItem("11 - й День", "4 Упражнения", WorkoutFragment::class, 11),
+        FragmentItem("12 - й День", "4 Упражнения", WorkoutFragment::class, 12),
+        FragmentItem("13 - й День", "4 Упражнения", WorkoutFragment::class, 13),
+        FragmentItem("14 - й День", "4 Упражнения", WorkoutFragment::class, 14)
     )
+
+    // Исправлено: workoutId от 1 до 14 для второго уровня
     val items2 = listOf(
-        FragmentItem("1 - й День 2 Уровень", "15 Упражнения", WorkoutFragment::class, 1),//айди наверн другой?
-        FragmentItem("2 - й День 2 Уровень", "12 Упражнения", WorkoutFragment::class, 2),
-        FragmentItem("3 - й День 2 Уровень", "10 Упражнения", WorkoutFragment::class, 3)
+        FragmentItem("1 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 1),
+        FragmentItem("2 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 2),
+        FragmentItem("3 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 3),
+        FragmentItem("4 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 4),
+        FragmentItem("5 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 5),
+        FragmentItem("6 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 6),
+        FragmentItem("7 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 7),
+        FragmentItem("8 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 8),
+        FragmentItem("9 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 9),
+        FragmentItem("10 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 10),
+        FragmentItem("11 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 11),
+        FragmentItem("12 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 12),
+        FragmentItem("13 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 13),
+        FragmentItem("14 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 14)
     )
+
     private val categories = listOf(
         WorkoutLevel(1, "1", "For the first level", R.drawable.first, items),
         WorkoutLevel(2, "2", "For the second level", R.drawable.second, items2)
@@ -64,15 +89,13 @@ class DayFragment : Fragment(), OnItemClickListener {
 
                     if (pos != RecyclerView.NO_POSITION) {
                         currentSelectedLevel = categories[pos].id
-                        adapter.updateItems(categories[pos].workouts,categories[pos].id)
+                        adapter.updateItems(categories[pos].workouts, categories[pos].id)
                         // Передаем информацию о текущем уровне в адаптер
                         adapter.updateCurrentLevel(currentSelectedLevel)
-
                     }
                 }
             }
         })
-
 
         val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()
 
@@ -85,7 +108,7 @@ class DayFragment : Fragment(), OnItemClickListener {
         LinearSnapHelper().attachToRecyclerView(recyclerView)
 
         // Показать товары первой категории
-        adapter.updateItems(categories.first().workouts,categories.first().id)
+        adapter.updateItems(categories.first().workouts, categories.first().id)
         return view
     }
 

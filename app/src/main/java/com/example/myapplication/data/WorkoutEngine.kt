@@ -5,27 +5,11 @@ import android.speech.tts.TextToSpeech
 import com.example.myapplication.R
 import com.example.myapplication.domain.WorkoutStateListener
 import com.example.myapplication.domain.WorkoutViewState
+import com.example.myapplication.exercises.AllExercises.workoutExercises
 
 // WorkoutEngine.kt - ядро логики тренировки
 class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : WorkoutController {
 
-   /*  val workoutExercises = mapOf(
-        1 to listOf(
-            Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench),
-            Exercise("Squat", 3, R.drawable.squat_animation),
-            Exercise("Gluteal bridge", 3, R.drawable.gluteal_bridge)
-        ),
-        2 to listOf(
-            Exercise("Squat", 3, R.drawable.squat_animation),
-            Exercise("Gluteal bridge", 3, R.drawable.gluteal_bridge),
-            Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench)
-        ),
-        3 to listOf(
-            Exercise("Squat", 3, R.drawable.squat_animation),
-            Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench),
-            Exercise("Squat", 3, R.drawable.squat_animation)
-        )
-    )*/
    private val exercises: List<Exercise> =
        workoutExercises[WorkoutKey( workoutId,workoutLvl)] ?: workoutExercises[WorkoutKey(1, 1)]!!
 
@@ -145,29 +129,5 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
     fun cleanup() {
         timer?.cancel()
         stateListener = null
-    }
-    companion object {
-        val workoutExercises = mapOf(
-            WorkoutKey(1,1) to listOf(
-                Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench),
-                Exercise("Squat", 3, R.drawable.squat_animation),
-                Exercise("Gluteal bridge", 3, R.drawable.gluteal_bridge)
-            ),
-            WorkoutKey(1,2) to listOf(
-                Exercise("Squat", 3, R.drawable.squat_animation),
-                Exercise("Gluteal bridge", 3, R.drawable.gluteal_bridge),
-                Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench)
-            ),
-            WorkoutKey(1,2) to listOf(
-                Exercise("Squat", 3, R.drawable.squat_animation),
-                Exercise("Split squats from bench", 3, R.drawable.split_squats_from_bench),
-                Exercise("Squat", 3, R.drawable.squat_animation)
-            )
-        )
-
-        fun getExercisesForWorkout(workoutId: Int, workoutLvl: Int): List<Exercise> {
-            return workoutExercises[WorkoutKey(workoutLvl, workoutId)]
-                ?: workoutExercises[WorkoutKey(1, 1)]!!
-        }
     }
 }

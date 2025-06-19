@@ -20,7 +20,7 @@ class LevelAdapter(
             img.setImageResource(item.imageResId!!)
         }
   /*      fun bind(item: WorkoutLevel) {
-            img.visibility = View.VISIBLE
+            workoutimg.visibility = View.VISIBLE
         }*/
     }
 
