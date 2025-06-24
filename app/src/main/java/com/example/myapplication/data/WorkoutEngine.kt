@@ -113,7 +113,7 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
         // Сброс паузы
         isPaused = false
 
-        // Если мы в начале — просто перезапускаем текущее
+        // Если мы в начале - просто перезапускаем текущее
         if (currentIndex == 0) {
             remainingTime = 0
             startExercise()

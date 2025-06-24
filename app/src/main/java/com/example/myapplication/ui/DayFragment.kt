@@ -7,21 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
+
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
-import com.example.myapplication.WorkoutApp
 import com.example.myapplication.data.WorkoutLevel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.reflect.KClass
 
 class DayFragment : Fragment(), OnItemClickListener {
-    private lateinit var categoryAdapter: LevelAdapter
-    private lateinit var adapter: CustomAdapter
+    private lateinit var viewPager: ViewPager2
+    private lateinit var pagerAdapter: LevelPagerAdapter
 
-    // Добавляем переменную для отслеживания текущего уровня
+    //  для отслеживания текущего уровня
     private var currentSelectedLevel: Int = 1
 
     val items = listOf(
@@ -41,7 +38,6 @@ class DayFragment : Fragment(), OnItemClickListener {
         FragmentItem("14 - й День", "4 Упражнения", WorkoutFragment::class, 14)
     )
 
-    // Исправлено: workoutId от 1 до 14 для второго уровня
     val items2 = listOf(
         FragmentItem("1 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 1),
         FragmentItem("2 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 2),
@@ -69,46 +65,21 @@ class DayFragment : Fragment(), OnItemClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_day, container, false)
+        val view = inflater.inflate(R.layout.fragment_day_viewpager, container, false)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.my_recycler_view)
+        viewPager = view.findViewById(R.id.viewPager)
+        pagerAdapter = LevelPagerAdapter(this, categories, this)
+        viewPager.adapter = pagerAdapter
 
-        val categoryRecycler = view.findViewById<RecyclerView>(R.id.recyclerCategories)
-        categoryAdapter = LevelAdapter(categories)
-        categoryRecycler?.layoutManager = LinearLayoutManager(requireContext())
-        categoryRecycler?.adapter = categoryAdapter
-        categoryRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        PagerSnapHelper().attachToRecyclerView(categoryRecycler)
-
-        categoryRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                    val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
-
-                    if (pos != RecyclerView.NO_POSITION) {
-                        currentSelectedLevel = categories[pos].id
-                        adapter.updateItems(categories[pos].workouts, categories[pos].id)
-                        // Передаем информацию о текущем уровне в адаптер
-                        adapter.updateCurrentLevel(currentSelectedLevel)
-                    }
-                }
+        // Слушатель для отслеживания смены страниц
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                currentSelectedLevel = categories[position].id
             }
         })
 
-        val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()
-
-        adapter = CustomAdapter(items, historyDao, this, this)
-
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
-
-        // Snap для продуктов
-        LinearSnapHelper().attachToRecyclerView(recyclerView)
-
-        // Показать товары первой категории
-        adapter.updateItems(categories.first().workouts, categories.first().id)
+        currentSelectedLevel = categories.first().id
         return view
     }
 
@@ -124,7 +95,6 @@ class DayFragment : Fragment(), OnItemClickListener {
     ) {
         when (fragmentClass) {
             WorkoutFragment::class -> {
-                // Создаём action с аргументом workoutId
                 val action = DayFragmentDirections.actionDayFragmentToWorkoutPreviewFragment(workoutId, currentSelectedLevel)
                 findNavController().navigate(action)
             }
