@@ -7,14 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
 import com.example.myapplication.data.WorkoutLevel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import kotlin.reflect.KClass
 
+
 class DayFragment : Fragment(), OnItemClickListener {
+    private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var pagerAdapter: LevelPagerAdapter
 
@@ -66,11 +70,17 @@ class DayFragment : Fragment(), OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_day_viewpager, container, false)
-
         viewPager = view.findViewById(R.id.viewPager)
         pagerAdapter = LevelPagerAdapter(this, categories, this)
         viewPager.adapter = pagerAdapter
-
+        tabLayout = view.findViewById(R.id.tab_layout)
+        val tabLayoutMediator =
+            TabLayoutMediator(tabLayout, viewPager, object : TabConfigurationStrategy {
+                override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
+                    tab.setText("Уровень " + (position + 1))
+                }
+            })
+        tabLayoutMediator.attach()
         // Слушатель для отслеживания смены страниц
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

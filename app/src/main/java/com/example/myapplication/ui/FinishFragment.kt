@@ -69,69 +69,44 @@ class FinishFragment : Fragment() {
             }
         }
 
-
-        // Inflate the layout for this fragment
         return view
     }
 
-    private fun saveCompletedWorkout()
-        {
-            val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+    private fun saveCompletedWorkout() {
+        val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
 
-            val historyEntity = HistoryEntity(
-                date = currentDate,
-                workoutId = workoutId.toString(),
-                workoutLvl = workoutLevel.toString() // Теперь используем правильный уровень
-            )
+        val historyEntity = HistoryEntity(
+            date = currentDate,
+            workoutId = workoutId.toString(),
+            workoutLvl = workoutLevel.toString() // Теперь используем правильный уровень
+        )
 
-            val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()
+        val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                try {
-                    historyDao.insert(historyEntity)
-                    Log.d(
-                        "FinishFragment",
-                        "Workout saved successfully: ID=$workoutId, Level=$workoutLevel, Date=$currentDate"
-                    )
-                    // Показываем Toast на главном потоке
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Тренировка сохранена!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                } catch (e: Exception) {
-                    Log.e("FinishFragment", "Error saving workout", e)
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "Ошибка сохранения", Toast.LENGTH_SHORT)
-                            .show()
-                    }
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                historyDao.insert(historyEntity)
+                Log.d(
+                    "FinishFragment",
+                    "Workout saved successfully: ID=$workoutId, Level=$workoutLevel, Date=$currentDate"
+                )
+                // Показываем Toast на главном потоке
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Тренировка сохранена!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                Log.e("FinishFragment", "Error saving workout", e)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Ошибка сохранения", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
-
         }
-        /*
-            private fun addDatetoDatabase(historyDao: HistoryDao){
 
-                val workoutId: Int = args.workoutId // У тебя он integer, а не String
-                // Если нужно как строку:
-                val workoutIdStr = workoutId.toString()
-                val workoutLevel = args.workoutLvl
-                Log.d("FinishFragment", "workoutIdStr: $workoutIdStr")
-
-                val mycalender=Calendar.getInstance()
-                val datetime=mycalender.time
-                Log.e("Date",""+datetime)
-                val sdf=SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.getDefault())
-                val currentdate=sdf.format(datetime)
-                Log.e("Formated Date",""+currentdate)
-                lifecycleScope.launch (Dispatchers.IO){
-                    historyDao.insert(HistoryEntity(currentdate,workoutIdStr,workoutLevel))
-
-
-
-                }
-            }*/
+    }
 
 }
