@@ -20,6 +20,7 @@ class WorkoutPreviewFragment : Fragment() {
 
     private val args: WorkoutPreviewFragmentArgs by navArgs()
     private lateinit var exercisePreviewAdapter: ExercisePreviewAdapter
+    private lateinit var btnContinue: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,7 +75,7 @@ class WorkoutPreviewFragment : Fragment() {
 
         // Кнопки
       //  val btnStartAgain = view.findViewById<Button>(R.id.btnStartAgain)
-        val btnContinue = view.findViewById<Button>(R.id.btnStartExercises)
+         btnContinue = view.findViewById(R.id.btnStartExercises)
 
       /*  btnStartAgain.setOnClickListener {
             // Переход к тренировке с самого начала

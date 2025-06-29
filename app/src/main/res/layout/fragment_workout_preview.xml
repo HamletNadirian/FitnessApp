@@ -166,12 +166,12 @@
 
             <Button
                 android:id="@+id/btnStartExercises"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="Start"
+                android:text="@string/start"
                 android:textColor="@color/white"
-                android:background="@color/mainPrimary"
+                android:background="@color/black"
                 android:layout_marginStart="8dp"
                 android:textSize="14sp"
                 android:textStyle="bold" />
