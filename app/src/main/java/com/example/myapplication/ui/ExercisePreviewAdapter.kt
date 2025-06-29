@@ -5,7 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.Exercise
 
@@ -26,11 +28,18 @@ class ExercisePreviewAdapter(
             .inflate(R.layout.item_exercise_preview, parent, false)
         return ExercisePreviewViewHolder(view)
     }
-
+    override fun onViewRecycled(holder: ExercisePreviewViewHolder) {
+        super.onViewRecycled(holder)
+        Glide.with(holder.exerciseImage.context).clear(holder.exerciseImage)
+    }
     override fun onBindViewHolder(holder: ExercisePreviewViewHolder, position: Int) {
         val exercise = exercises[position]
-
-        holder.exerciseImage.setImageResource(exercise.gifResId)
+        // Обновление GIF анимации
+        Glide.with(holder.exerciseImage.context)
+            .asGif()
+            .load(exercise.gifResId)
+            .into(holder.exerciseImage)
+        //holder.exerciseImage.setImageResource(exercise.gifResId)
         holder.exerciseName.text = exercise.name
         holder.exerciseDuration.text = formatDuration(exercise.durationSeconds)
 

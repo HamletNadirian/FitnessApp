@@ -99,7 +99,6 @@ class WorkoutFragment : Fragment() {
         // Наблюдение за состоянием тренировки
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
             updateUI(state)
-
         }
         viewModel.navigateToFinish.observe(viewLifecycleOwner) { shouldNavigate ->
             if (shouldNavigate) {
@@ -142,7 +141,6 @@ class WorkoutFragment : Fragment() {
             speakOut(state.exerciseName)
             lastSpokenExerciseName = state.exerciseName
         }
-
         // Обновление названия упражнения
         textExerciseName.text = state.exerciseName
 
