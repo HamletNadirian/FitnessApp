@@ -1,10 +1,10 @@
 package com.example.myapplication
 
 import android.app.Application
-import com.example.myapplication.data.HistorydDB
+import com.example.myapplication.data.HistoryDB
 
 class WorkoutApp:Application(){
     val db by lazy {
-        HistorydDB.getInstance(this)
+        HistoryDB.getInstance(this)
     }
 }

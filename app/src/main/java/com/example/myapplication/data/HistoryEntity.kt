@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "history-table")
 data class HistoryEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val date: String,
+    val time: String,
+    val weight: Float,
     @ColumnInfo(name = "workout_id")
     val workoutId: String,
     @ColumnInfo(name = "workout_lvl")

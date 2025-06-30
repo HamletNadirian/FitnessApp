@@ -1,6 +1,8 @@
 package com.example.myapplication.data
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,20 +11,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.WorkoutApp
 import com.example.myapplication.databinding.FragmentHistoryBinding
-import com.example.myapplication.ui.HistoryAdapter
+import com.example.myapplication.ui.EventDecorator
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,44 +41,52 @@ class HistoryFragment : Fragment() {
             requireActivity().onBackPressed()
         }
         val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()
-        getAllCompleteDates(historyDao)
+        setupCalendar(historyDao)
     }
-    private fun getAllCompleteDates(historyDao: HistoryDao){
 
+    private fun setupCalendar(historyDao: HistoryDao) {
+        val calendarView = binding.calendarView
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-
-                historyDao.fetchAllDates().collect { allCompleteDatesList ->
-                    if (allCompleteDatesList.isNotEmpty()) {
-                        binding?.tvhistory?.visibility = View.VISIBLE
-                        binding?.rvhistory?.visibility = View.VISIBLE
-                        binding?.tvnodataavailable?.visibility = View.GONE
-                        binding?.rvhistory?.layoutManager = LinearLayoutManager(
-                            this@HistoryFragment.requireContext(),
-                            LinearLayoutManager.VERTICAL,
-                            false
-                        )
-
-                        val historyItems = allCompleteDatesList.map {
-                            WorkoutHistoryItem(
-                                date = it.date,
-                                workoutId = it.workoutId,
-                                workoutLevel = it.workoutLvl
-                            )
+                historyDao.fetchAllDates().collect { historyList ->
+                    Log.d("HistoryFragment", "Fetched history: $historyList") // Debug log
+                    if (historyList.isNotEmpty()) {
+                        binding.tvhistory.visibility = View.VISIBLE
+                        binding.calendarView.visibility = View.VISIBLE
+                        binding.tvnodataavailable.visibility = View.GONE
+                        val dates = historyList.map { parseDate(it.date) }
+                        calendarView.addDecorators(EventDecorator(requireContext(), dates))
+                        calendarView.setOnDateChangedListener { _, date, _ ->
+                            val events = historyList.filter { parseDate(it.date) == date }
+                            showEventDialog(events)
                         }
-
-                        //val historyAdapter =
-                        binding?.rvhistory?.adapter = HistoryAdapter(historyItems)
                     } else {
-                        binding?.tvhistory?.visibility = View.GONE
-                        binding?.rvhistory?.visibility = View.GONE
-                        binding?.tvnodataavailable?.visibility = View.VISIBLE
+                        binding.tvhistory.visibility = View.GONE
+                        binding.calendarView.visibility = View.GONE
+                        binding.tvnodataavailable.visibility = View.VISIBLE
                     }
                 }
             }
         }
     }
-    override fun onDestroyView(){
+
+    private fun parseDate(dateStr: String): CalendarDay {
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val date = sdf.parse(dateStr) ?: Date() // Fallback to today if parsing fails
+        val calendar = Calendar.getInstance().apply { time = date }
+        return CalendarDay.from(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+    }
+
+    private fun showEventDialog(events: List<HistoryEntity>) {
+        // Implement a dialog to show workout details
+        // Example: AlertDialog with event list
+    }
+
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

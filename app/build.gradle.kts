@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.material.calendarview)
     implementation(libs.core.splashscreen)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)

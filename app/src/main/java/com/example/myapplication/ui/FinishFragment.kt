@@ -21,9 +21,9 @@ import com.example.myapplication.data.HistoryEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+
 
 class FinishFragment : Fragment() {
     private var workoutId: Int = 0
@@ -74,11 +74,15 @@ class FinishFragment : Fragment() {
 
     private fun saveCompletedWorkout() {
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+        val currentTime = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date()) // e.g., "01:15 PM"
+        val weight = 9.0f // Example weight, could be user input
 
         val historyEntity = HistoryEntity(
             date = currentDate,
+            time = currentTime,
+            weight = weight,
             workoutId = workoutId.toString(),
-            workoutLvl = workoutLevel.toString() // Теперь используем правильный уровень
+            workoutLvl = workoutLevel.toString()
         )
 
         val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()
@@ -88,9 +92,8 @@ class FinishFragment : Fragment() {
                 historyDao.insert(historyEntity)
                 Log.d(
                     "FinishFragment",
-                    "Workout saved successfully: ID=$workoutId, Level=$workoutLevel, Date=$currentDate"
+                    "Workout saved successfully: ID=$workoutId, Level=$workoutLevel, Date=$currentDate, Time=$currentTime, Weight=$weight"
                 )
-                // Показываем Toast на главном потоке
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
                         requireContext(),
@@ -106,7 +109,6 @@ class FinishFragment : Fragment() {
                 }
             }
         }
-
     }
 
 }
