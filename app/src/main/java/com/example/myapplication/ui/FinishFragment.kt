@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Date
 import java.util.Locale
+import kotlin.Float
 
 
 class FinishFragment : Fragment() {
@@ -82,7 +83,9 @@ class FinishFragment : Fragment() {
             time = currentTime,
             weight = weight,
             workoutId = workoutId.toString(),
-            workoutLvl = workoutLevel.toString()
+            workoutLvl = workoutLevel.toString(),
+            durationMinutes = 10.0f // Example duration, could be calculated based on workout exercises
+
         )
 
         val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()

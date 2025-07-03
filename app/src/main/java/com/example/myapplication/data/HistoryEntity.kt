@@ -10,6 +10,7 @@ data class HistoryEntity(
     val date: String,
     val time: String,
     val weight: Float,
+    val durationMinutes: Float,
     @ColumnInfo(name = "workout_id")
     val workoutId: String,
     @ColumnInfo(name = "workout_lvl")

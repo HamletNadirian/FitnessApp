@@ -32,14 +32,11 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarHistoryActivity)
         (activity as AppCompatActivity).supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = "HISTORY"
         }
-        binding.toolbarHistoryActivity.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
-        }
+
         val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()
         setupCalendar(historyDao)
     }
@@ -51,9 +48,11 @@ class HistoryFragment : Fragment() {
                 historyDao.fetchAllDates().collect { historyList ->
                     Log.d("HistoryFragment", "Fetched history: $historyList") // Debug log
                     if (historyList.isNotEmpty()) {
-                        binding.tvhistory.visibility = View.VISIBLE
+                        binding.tvValueTotalNumberOfTrainings.text = historyList.size.toString()
                         binding.calendarView.visibility = View.VISIBLE
-                        binding.tvnodataavailable.visibility = View.GONE
+                        binding.tvValueTotalNumberOfTime.text =
+                            historyList.sumOf { it.durationMinutes.toInt() }.toString()
+                        binding.tvValueTotalNumberOfKcal.text = "676"//todo need to calculate
                         val dates = historyList.map { parseDate(it.date) }
                         calendarView.addDecorators(EventDecorator(requireContext(), dates))
                         calendarView.setOnDateChangedListener { _, date, _ ->
@@ -61,9 +60,7 @@ class HistoryFragment : Fragment() {
                             showEventDialog(events)
                         }
                     } else {
-                        binding.tvhistory.visibility = View.GONE
                         binding.calendarView.visibility = View.GONE
-                        binding.tvnodataavailable.visibility = View.VISIBLE
                     }
                 }
             }
@@ -76,7 +73,7 @@ class HistoryFragment : Fragment() {
         val calendar = Calendar.getInstance().apply { time = date }
         return CalendarDay.from(
             calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.MONTH)+1,
             calendar.get(Calendar.DAY_OF_MONTH)
         )
     }
