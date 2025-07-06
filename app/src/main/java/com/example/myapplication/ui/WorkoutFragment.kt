@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -60,7 +59,7 @@ class WorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Use custom ViewModelFactory to create ViewModel with workoutId
-        val factory = WorkoutViewModelFactory(workoutId,workoutLevel)
+        val factory = WorkoutViewModelFactory(workoutId, workoutLevel)
         viewModel = ViewModelProvider(this, factory)[WorkoutViewModel::class.java]
 
         // Инициализация UI компонентов
@@ -137,7 +136,7 @@ class WorkoutFragment : Fragment() {
     }
 
     private fun updateUI(state: WorkoutViewState) {
-        if (state.exerciseName != lastSpokenExerciseName && state.exerciseName.isNotEmpty()&& isTtsReady) {
+        if (state.exerciseName != lastSpokenExerciseName && state.exerciseName.isNotEmpty() && isTtsReady) {
             speakOut(state.exerciseName)
             lastSpokenExerciseName = state.exerciseName
         }

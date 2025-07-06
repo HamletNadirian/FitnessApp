@@ -1,27 +1,25 @@
 package com.example.myapplication.ui
 
-import android.R
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.data.WorkoutHistoryItem
 import com.example.myapplication.databinding.ItemHistoryRowBinding
 
-class HistoryAdapter(private val items: List<WorkoutHistoryItem>)
-    :RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
-    class ViewHolder(binding: ItemHistoryRowBinding): RecyclerView.ViewHolder(binding.root) {
+class HistoryAdapter(private val items: List<WorkoutHistoryItem>) :
+    RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+    class ViewHolder(binding: ItemHistoryRowBinding) : RecyclerView.ViewHolder(binding.root) {
         val tvitem = binding.tvitem
         val tvposition = binding.tvposition
         val tvlvl = binding.tvlvl
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemHistoryRowBinding.inflate(
-            LayoutInflater.from(parent.context),parent,false
-        ))
+        return ViewHolder(
+            ItemHistoryRowBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
     }
 
     override fun getItemCount(): Int {

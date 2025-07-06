@@ -1,27 +1,31 @@
 package com.example.myapplication.data
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-@Database(entities = [HistoryEntity::class], version = 6)
-abstract class HistoryDB:RoomDatabase() {
-    abstract fun HistoryDao():HistoryDao
 
-    companion object{
+@Database(entities = [HistoryEntity::class], version = 6)
+abstract class HistoryDB : RoomDatabase() {
+    abstract fun HistoryDao(): HistoryDao
+
+    companion object {
 
         @Volatile
-        private var INSTANCE:HistoryDB?=null
+        private var INSTANCE: HistoryDB? = null
 
-        fun getInstance(context: Context):HistoryDB{
+        fun getInstance(context: Context): HistoryDB {
 
-            synchronized(this){
-                var instance= INSTANCE
-                if (instance==null){
-                    instance= Room.databaseBuilder(context.applicationContext,
+            synchronized(this) {
+                var instance = INSTANCE
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
                         HistoryDB::class.java,
-                        "History_database").fallbackToDestructiveMigration()
+                        "History_database"
+                    ).fallbackToDestructiveMigration()
                         .build()
-                    INSTANCE=instance
+                    INSTANCE = instance
                 }
                 return instance
             }

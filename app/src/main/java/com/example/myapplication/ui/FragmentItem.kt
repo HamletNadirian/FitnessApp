@@ -9,4 +9,4 @@ data class FragmentItem(
     val fragmentClass: KClass<out Fragment>,
     var workoutId: Int,
 
-)
+    )

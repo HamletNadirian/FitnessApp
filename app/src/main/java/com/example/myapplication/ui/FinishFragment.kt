@@ -13,17 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.WorkoutApp
-import com.example.myapplication.data.HistoryDao
 import com.example.myapplication.data.HistoryEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Date
 import java.util.Locale
-import kotlin.Float
 
 
 class FinishFragment : Fragment() {
@@ -75,7 +72,8 @@ class FinishFragment : Fragment() {
 
     private fun saveCompletedWorkout() {
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-        val currentTime = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date()) // e.g., "01:15 PM"
+        val currentTime =
+            SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date()) // e.g., "01:15 PM"
         val weight = 9.0f // Example weight, could be user input
 
         val historyEntity = HistoryEntity(

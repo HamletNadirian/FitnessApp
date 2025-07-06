@@ -74,15 +74,15 @@ class WorkoutPreviewFragment : Fragment() {
         recyclerView.adapter = exercisePreviewAdapter
 
         // Кнопки
-      //  val btnStartAgain = view.findViewById<Button>(R.id.btnStartAgain)
-         btnContinue = view.findViewById(R.id.btnStartExercises)
+        //  val btnStartAgain = view.findViewById<Button>(R.id.btnStartAgain)
+        btnContinue = view.findViewById(R.id.btnStartExercises)
 
-      /*  btnStartAgain.setOnClickListener {
-            // Переход к тренировке с самого начала
-            val action = WorkoutPreviewFragmentDirections
-                .actionWorkoutPreviewFragmentToWorkoutFragment(workoutId, workoutLevel)
-            findNavController().navigate(action)
-        }*/
+        /*  btnStartAgain.setOnClickListener {
+              // Переход к тренировке с самого начала
+              val action = WorkoutPreviewFragmentDirections
+                  .actionWorkoutPreviewFragmentToWorkoutFragment(workoutId, workoutLevel)
+              findNavController().navigate(action)
+          }*/
 
         btnContinue.setOnClickListener {
             // Здесь можно добавить логику для продолжения с места остановки

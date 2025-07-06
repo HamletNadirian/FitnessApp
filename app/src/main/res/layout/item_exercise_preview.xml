@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/ivExerciseImage"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="98dp"
+        android:layout_height="86dp"
         android:scaleType="centerCrop"
         android:background="@drawable/rounded_corner_background"
         android:src="@drawable/squat_animation" />

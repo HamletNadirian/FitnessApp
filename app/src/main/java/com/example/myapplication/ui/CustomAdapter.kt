@@ -45,7 +45,8 @@ class CustomAdapter(
         private fun checkWorkoutCompletion(workoutId: Int) {
             lifecycleOwner.lifecycleScope.launch {
                 historyDao.fetchAllDates().collect { completedWorkouts ->
-                    val isCompleted = completedWorkouts.any { it.workoutId == workoutId.toString()&& it.workoutLvl==( currentLevel).toString() }
+                    val isCompleted =
+                        completedWorkouts.any { it.workoutId == workoutId.toString() && it.workoutLvl == (currentLevel).toString() }
                     if (isCompleted) {
                         ivStatus.visibility = View.VISIBLE
                         ivStatus.setImageResource(R.drawable.ic_check)

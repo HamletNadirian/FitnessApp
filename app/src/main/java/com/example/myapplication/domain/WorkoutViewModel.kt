@@ -7,7 +7,7 @@ import com.example.myapplication.data.WorkoutEngine
 
 // Step 6: Update WorkoutViewModel to accept workout ID
 class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) : ViewModel() {
-    private val workoutEngine = WorkoutEngine(workoutId,workoutLvl)
+    private val workoutEngine = WorkoutEngine(workoutId, workoutLvl)
 
 
     private val _navigateToFinish = MutableLiveData<Boolean>()
@@ -31,6 +31,7 @@ class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) 
             override fun onWorkoutStateChanged(state: WorkoutViewState) {
                 _viewState.postValue(state)
             }
+
             override fun onWorkoutComplete() {
                 completeWorkout()
             }

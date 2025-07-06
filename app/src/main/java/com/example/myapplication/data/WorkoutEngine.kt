@@ -1,8 +1,6 @@
 package com.example.myapplication.data
 
 import android.os.CountDownTimer
-import android.speech.tts.TextToSpeech
-import com.example.myapplication.R
 import com.example.myapplication.domain.WorkoutStateListener
 import com.example.myapplication.domain.WorkoutViewState
 import com.example.myapplication.exercises.AllExercises.workoutExercises
@@ -10,8 +8,8 @@ import com.example.myapplication.exercises.AllExercises.workoutExercises
 // WorkoutEngine.kt - ядро логики тренировки
 class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : WorkoutController {
 
-   private val exercises: List<Exercise> =
-       workoutExercises[WorkoutKey( workoutId,workoutLvl)] ?: workoutExercises[WorkoutKey(1, 1)]!!
+    private val exercises: List<Exercise> =
+        workoutExercises[WorkoutKey(workoutId, workoutLvl)] ?: workoutExercises[WorkoutKey(1, 1)]!!
 
     private var currentIndex = 0
     private var remainingTime = 0
