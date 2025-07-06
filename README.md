@@ -10,8 +10,12 @@ Screenshots.
 </p>
 
 📌 TODO
-Adding workouts.
-Adding levels.
-Adding instructions to workouts.
-Adding the " I am " Screen
-Implementation of a step-counter.
+
+ Adding workouts.
+
+ Adding levels.
+
+ Adding the " I am " Screen.
+
+ Implementation of a step-counter.
+
