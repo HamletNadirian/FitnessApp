@@ -8,3 +8,10 @@ Screenshots.
   <img src="docs/images/3.png" width="150" />
   <img src="docs/images/4.png" width="150" style="margin-right:10px;" />
 </p>
+
+📌 TODO
+Adding workouts.
+Adding levels.
+Adding instructions to workouts.
+Adding the " I am " Screen
+Implementation of a step-counter.
