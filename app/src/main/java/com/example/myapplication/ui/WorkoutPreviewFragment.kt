@@ -13,8 +13,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.data.Exercise
 import com.example.myapplication.exercises.AllExercises
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.myapplication.ui.OnItemClickListener // <= важно!
+import kotlin.reflect.KClass
 
 class WorkoutPreviewFragment : Fragment() {
 
@@ -40,7 +43,7 @@ class WorkoutPreviewFragment : Fragment() {
         setupUI(view)
     }
 
-    private fun setupUI(view: View) {
+     fun setupUI(view: View) {
         val workoutId = args.workoutId
         val workoutLevel = args.workoutLevel
         // Получаем упражнения из WorkoutEngine
@@ -69,20 +72,27 @@ class WorkoutPreviewFragment : Fragment() {
 
         // Настройка RecyclerView с упражнениями
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerExercises)
-        exercisePreviewAdapter = ExercisePreviewAdapter(exercises)
+      //  exercisePreviewAdapter = ExercisePreviewAdapter(exercises)
+
+     exercisePreviewAdapter = ExercisePreviewAdapter(exercises, object : OnItemClickListener {
+         override fun onItemClick(
+             fragmentClass: KClass<out Fragment>,
+             workoutId: Int
+         ) {
+             TODO("Not yet implemented")
+         }
+
+         override fun onExerciseClick(exercise: Exercise) {
+             // Обработка клика на упражнение
+             val bottomSheet = ExerciseDetailBottomSheet.newInstance(exercise)
+             bottomSheet.show(childFragmentManager, "exercise_detail_bottom_sheet")
+         }
+     })
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = exercisePreviewAdapter
 
-        // Кнопки
-        //  val btnStartAgain = view.findViewById<Button>(R.id.btnStartAgain)
         btnContinue = view.findViewById(R.id.btnStartExercises)
-
-        /*  btnStartAgain.setOnClickListener {
-              // Переход к тренировке с самого начала
-              val action = WorkoutPreviewFragmentDirections
-                  .actionWorkoutPreviewFragmentToWorkoutFragment(workoutId, workoutLevel)
-              findNavController().navigate(action)
-          }*/
 
         btnContinue.setOnClickListener {
             // Здесь можно добавить логику для продолжения с места остановки

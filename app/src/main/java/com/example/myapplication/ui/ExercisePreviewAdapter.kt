@@ -11,15 +11,35 @@ import com.example.myapplication.R
 import com.example.myapplication.data.Exercise
 
 class ExercisePreviewAdapter(
-    private val exercises: List<Exercise>
+    private val exercises: List<Exercise>,
+    private var listener: OnItemClickListener
 ) : RecyclerView.Adapter<ExercisePreviewAdapter.ExercisePreviewViewHolder>() {
-
-    class ExercisePreviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+    inner class ExercisePreviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val exerciseImage: ImageView = itemView.findViewById(R.id.ivExerciseImage)
         val exerciseName: TextView = itemView.findViewById(R.id.tvExerciseName)
         val exerciseDuration: TextView = itemView.findViewById(R.id.tvExerciseDuration)
         val exerciseNumber: TextView = itemView.findViewById(R.id.tvExerciseNumber)
         val checkIcon: ImageView = itemView.findViewById(R.id.ivCheckIcon)
+
+        fun bind(exercise: Exercise) {
+            itemView.setOnClickListener {
+                listener?.onExerciseClick(exercise)
+
+            }
+        }
+     /*   init {
+
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener?.onItemClick(exercises[position])
+
+                }
+            }
+        }*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercisePreviewViewHolder {
@@ -49,7 +69,7 @@ class ExercisePreviewAdapter(
         holder.exerciseNumber.text = (position + 1).toString()
         holder.exerciseNumber.visibility = View.VISIBLE
         holder.checkIcon.visibility = View.GONE
-
+        holder.bind(exercise)
         // TODO: Здесь можно добавить логику для отображения прогресса выполнения
         // например, если упражнение выполнено, показывать галочку вместо номера
     }

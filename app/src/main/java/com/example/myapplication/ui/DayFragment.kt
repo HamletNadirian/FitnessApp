@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
+import com.example.myapplication.data.Exercise
 import com.example.myapplication.data.WorkoutLevel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
@@ -117,5 +118,9 @@ class DayFragment : Fragment(), OnItemClickListener {
                     .show()
             }
         }
+    }
+
+    override fun onExerciseClick(exercise: Exercise) {
+        TODO("Not yet implemented")
     }
 }
