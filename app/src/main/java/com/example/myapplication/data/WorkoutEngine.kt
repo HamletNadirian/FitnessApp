@@ -37,11 +37,21 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
         // Если это первый запуск упражнения, устанавливаем полное время
         if (remainingTime <= 0) {
             remainingTime = exercise.durationSeconds
-
         }
 
         startTimer(remainingTime)
         notifyStateChanged()
+    }
+
+    fun startNextExercise() {
+        if (currentIndex < exercises.size) {
+            // Сбрасываем remainingTime для нового упражнения
+            remainingTime = 0
+            startExercise()
+        } else {
+            // Если упражнения закончились
+            stateListener?.onWorkoutComplete()
+        }
     }
 
     private fun startTimer(seconds: Int) {
@@ -58,13 +68,28 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
                 remainingTime = 0
                 currentIndex++
                 if (currentIndex >= exercises.size) {
-
                     stateListener?.onWorkoutComplete()
                 } else {
-                    startExercise()
+                    // Показываем rest screen и переходим к следующему упражнению
+                    notifyRestState()
                 }
             }
         }.start()
+    }
+
+    private fun notifyRestState() {
+        val nextExercise = exercises[currentIndex]
+        stateListener?.onWorkoutStateChanged(
+            WorkoutViewState(
+                exerciseName = nextExercise.name,
+                gifResourceId = nextExercise.gifResId,
+                timeRemaining = 0,
+                isPlaying = false,
+                totalExercises = exercises.size,
+                currentExerciseIndex = currentIndex + 1,
+                isResting = true
+            )
+        )
     }
 
     private fun notifyStateChanged() {
@@ -77,7 +102,8 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
                 timeRemaining = remainingTime,
                 isPlaying = !isPaused,
                 totalExercises = exercises.size,
-                currentExerciseIndex = currentIndex + 1
+                currentExerciseIndex = currentIndex + 1,
+                isResting = false
             )
         )
     }
@@ -101,7 +127,8 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
         if (currentIndex >= exercises.size) {
             stateListener?.onWorkoutComplete()
         } else {
-            startExercise()
+            // Показываем rest screen перед следующим упражнением
+            notifyRestState()
         }
     }
 

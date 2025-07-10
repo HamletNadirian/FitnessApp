@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_workoutFragment_to_finishFragment"
             app:destination="@id/finishFragment" />
+        <action
+            android:id="@+id/action_workoutFragment_to_restFragment"
+            app:destination="@id/restFragment" />
 
     </fragment>
 
@@ -81,6 +84,15 @@
         <argument
             android:name="workoutLevel"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/restFragment"
+        android:name="com.example.myapplication.ui.RestFragment"
+        android:label="fragment_rest"
+        tools:layout="@layout/fragment_rest" >
+        <action
+            android:id="@+id/action_restFragment_to_workoutFragment"
+            app:destination="@id/workoutFragment" />
     </fragment>
 
 

@@ -7,15 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.domain.WorkoutViewModel
 import com.example.myapplication.domain.WorkoutViewModelFactory
 import com.example.myapplication.domain.WorkoutViewState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 class WorkoutFragment : Fragment() {
@@ -33,6 +37,12 @@ class WorkoutFragment : Fragment() {
     private var tts: TextToSpeech? = null
     private var lastSpokenExerciseName: String? = null
     private var isTtsReady = false
+
+
+    private lateinit var progressCircular: ProgressBar
+    private lateinit var textTimerCenter: TextView
+    private lateinit var restScreen: View
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +67,7 @@ class WorkoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        restScreen = view.findViewById(R.id.restScreenContainer)
 
         // Use custom ViewModelFactory to create ViewModel with workoutId
         val factory = WorkoutViewModelFactory(workoutId, workoutLevel)
@@ -70,6 +81,12 @@ class WorkoutFragment : Fragment() {
         buttonPause = view.findViewById(R.id.buttonPause)
         buttonSkip = view.findViewById(R.id.buttonSkip)
         buttonPrev = view.findViewById(R.id.buttonPrev)
+
+
+        progressCircular = view.findViewById(R.id.progressCircular)
+        textTimerCenter = view.findViewById(R.id.textTimerCenter)
+
+
 
         // Настройка UI контроллеров
         setupControllers()
@@ -99,6 +116,13 @@ class WorkoutFragment : Fragment() {
 
         // Наблюдение за состоянием тренировки
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
+            if (state.isResting) {
+                showRestScreenAndStartExercise {
+                    viewModel.startNextExercise() // Добавьте этот метод в ViewModel
+                }
+            } else {
+                hideRestScreen()
+            }
             updateUI(state)
         }
         viewModel.navigateToFinish.observe(viewLifecycleOwner) { shouldNavigate ->
@@ -111,7 +135,28 @@ class WorkoutFragment : Fragment() {
             }
         }
     }
+    // Исправленный метод для showRestScreenAndStartExercise
+    private fun showRestScreenAndStartExercise(onFinish: () -> Unit) {
+        restScreen.visibility = View.VISIBLE
+        // Устанавливаем максимальное значение прогресс-бара
+        progressCircular.max = 10
+        progressCircular.progress = 10
 
+
+        lifecycleScope.launch {
+            for (time in 10 downTo 1) {
+                progressCircular.progress = time
+                textTimerCenter.text = time.toString()
+                delay(1000)
+            }
+            progressCircular.progress = 0
+            textTimerCenter.text = "0"
+            delay(100)
+
+            restScreen.visibility = View.GONE
+            onFinish()
+        }
+    }
     private fun speakOut(text: String) {
         tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
@@ -136,8 +181,11 @@ class WorkoutFragment : Fragment() {
             viewModel.prev()
         }
     }
-
+    private fun hideRestScreen() {
+        restScreen.visibility = View.GONE
+    }
     private fun updateUI(state: WorkoutViewState) {
+
         if (state.exerciseName != lastSpokenExerciseName && state.exerciseName.isNotEmpty() && isTtsReady) {
             speakOut(state.exerciseName)
             lastSpokenExerciseName = state.exerciseName

@@ -104,5 +104,37 @@
             android:contentDescription="Следующее упражнение"
             android:src="@drawable/skip_forward_fill_svgrepo_com" />
     </LinearLayout>
+    <!-- Обёртка для экрана отдыха -->
+    <FrameLayout
+        android:id="@+id/restScreenContainer"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@android:color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/controlsLayout">
+
+        <!-- Тот самый круг -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ProgressBar
+                android:id="@+id/progressCircular"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="10"
+                android:progress="10" />
+            <TextView
+                android:id="@+id/textTimerCenter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="10"
+                android:textSize="36sp" />
+
+        </FrameLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

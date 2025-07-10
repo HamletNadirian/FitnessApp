@@ -6,5 +6,7 @@ data class WorkoutViewState(
     val timeRemaining: Int,
     val isPlaying: Boolean,
     val totalExercises: Int,
-    val currentExerciseIndex: Int
-)
+    val currentExerciseIndex: Int,
+    val isResting: Boolean,
+
+    )
