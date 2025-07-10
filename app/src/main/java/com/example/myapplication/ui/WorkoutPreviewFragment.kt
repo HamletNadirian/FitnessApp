@@ -1,5 +1,8 @@
 package com.example.myapplication.ui
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +19,8 @@ import com.example.myapplication.R
 import com.example.myapplication.data.Exercise
 import com.example.myapplication.exercises.AllExercises
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.example.myapplication.ui.OnItemClickListener // <= важно!
 import kotlin.reflect.KClass
+
 
 class WorkoutPreviewFragment : Fragment() {
 
@@ -30,6 +33,7 @@ class WorkoutPreviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_workout_preview, container, false)
     }
 
@@ -85,6 +89,7 @@ class WorkoutPreviewFragment : Fragment() {
          override fun onExerciseClick(exercise: Exercise) {
              // Обработка клика на упражнение
              val bottomSheet = ExerciseDetailBottomSheet.newInstance(exercise)
+
              bottomSheet.show(childFragmentManager, "exercise_detail_bottom_sheet")
          }
      })

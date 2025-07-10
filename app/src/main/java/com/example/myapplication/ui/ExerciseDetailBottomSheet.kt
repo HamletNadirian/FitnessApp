@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,7 @@ class ExerciseDetailBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         val tvName: TextView = view.findViewById(R.id.tvExerciseName)
         val tvDescription: TextView = view.findViewById(R.id.tvDescriptionExercise)

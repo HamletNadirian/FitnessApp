@@ -40,7 +40,7 @@ class FinishFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_finish, container, false)
 
-        val tvCongratulations = view?.findViewById<TextView>(R.id.tvCongratulations)
+        view?.findViewById<TextView>(R.id.tvCongratulations)
         val tvWorkoutCompleted = view?.findViewById<TextView>(R.id.tvWorkoutCompleted)
         val btnBackToList = view?.findViewById<Button>(R.id.btnBackToList)
 

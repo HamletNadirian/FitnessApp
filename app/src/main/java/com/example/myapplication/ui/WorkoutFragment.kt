@@ -83,8 +83,10 @@ class WorkoutFragment : Fragment() {
                     Log.d("TTS", "TTS initialized successfully")
                     isTtsReady = true
                     // Озвучить первое упражнение, если оно уже загружено
+
                     viewModel.viewState.value?.let { state ->
                         if (state.exerciseName.isNotEmpty() && lastSpokenExerciseName == null) {
+
                             speakOut(state.exerciseName)
                             lastSpokenExerciseName = state.exerciseName
                         }
