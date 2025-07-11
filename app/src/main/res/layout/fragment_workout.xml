@@ -17,6 +17,7 @@
         android:textColor="?attr/colorOnSurface"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:paddingTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00:30"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,58 +84,75 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginEnd="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@color/white"
             android:contentDescription="Предыдущее упражнение"
-            android:src="@drawable/skip_back_fill_svgrepo_com" />
+            android:src="@drawable/skip_back_fill_svgrepo_com"
+            app:tint="?attr/colorOnSurface" />
 
         <ImageView
             android:id="@+id/buttonPause"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@color/white"
             android:contentDescription="Пауза/Воспроизведение"
-            android:src="@drawable/pause_circle_svgrepo_com" />
+            android:src="@drawable/pause_circle_svgrepo_com"
+            app:tint="?attr/colorOnSurface" />
 
         <ImageView
             android:id="@+id/buttonSkip"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@color/white"
             android:contentDescription="Следующее упражнение"
-            android:src="@drawable/skip_forward_fill_svgrepo_com" />
+            android:src="@drawable/skip_forward_fill_svgrepo_com"
+            app:tint="?attr/colorOnSurface" />
     </LinearLayout>
     <!-- Обёртка для экрана отдыха -->
     <FrameLayout
         android:id="@+id/restScreenContainer"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:background="@android:color/white"
+        android:layout_height="300dp"
+        android:background="@color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/controlsLayout">
 
         <!-- Тот самый круг -->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <ProgressBar
-                android:id="@+id/progressCircular"
-                style="?android:attr/progressBarStyleHorizontal"
+            <TextView
+                android:id="@+id/textRest"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="10"
-                android:progress="10" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Отдых"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="32sp" />
             <TextView
                 android:id="@+id/textTimerCenter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="10"
-                android:textSize="36sp" />
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="32sp" />
 
-        </FrameLayout>
+           <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressCircular"
+                android:layout_width="261dp"
+                android:layout_height="152dp"
+                app:indicatorColor="@color/light_gray"
+                app:indicatorSize="100dp"
+                android:layout_gravity="center"
+                app:trackColor="@color/colorPrimary"
+                app:trackThickness="15dp" />
+
+        </LinearLayout>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,14 +14,12 @@
             app:argType="integer" />
         <argument
             android:name="workout_lvl"
-            app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="1"
+            app:argType="integer" />
         <action
             android:id="@+id/action_workoutFragment_to_finishFragment"
             app:destination="@id/finishFragment" />
-        <action
-            android:id="@+id/action_workoutFragment_to_restFragment"
-            app:destination="@id/restFragment" />
+
 
     </fragment>
 
@@ -44,8 +42,8 @@
             app:argType="integer" />
         <argument
             android:name="workout_lvl"
-            app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="1"
+            app:argType="integer" />
         <action
             android:id="@+id/action_finishFragment_to_dayFragment"
             app:destination="@id/dayFragment" />
@@ -85,15 +83,4 @@
             android:name="workoutLevel"
             app:argType="integer" />
     </fragment>
-    <fragment
-        android:id="@+id/restFragment"
-        android:name="com.example.myapplication.ui.RestFragment"
-        android:label="fragment_rest"
-        tools:layout="@layout/fragment_rest" >
-        <action
-            android:id="@+id/action_restFragment_to_workoutFragment"
-            app:destination="@id/workoutFragment" />
-    </fragment>
-
-
 </navigation>

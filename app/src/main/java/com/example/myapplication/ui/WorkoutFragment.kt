@@ -18,6 +18,7 @@ import com.example.myapplication.R
 import com.example.myapplication.domain.WorkoutViewModel
 import com.example.myapplication.domain.WorkoutViewModelFactory
 import com.example.myapplication.domain.WorkoutViewState
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -39,7 +40,7 @@ class WorkoutFragment : Fragment() {
     private var isTtsReady = false
 
 
-    private lateinit var progressCircular: ProgressBar
+    private lateinit var progressCircular: CircularProgressIndicator
     private lateinit var textTimerCenter: TextView
     private lateinit var restScreen: View
 

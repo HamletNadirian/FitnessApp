@@ -45,7 +45,6 @@ class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) 
     fun skip() {
         workoutEngine.skipExercise()
     }
-    // В WorkoutViewModel.kt добавьте этот метод:
     fun startNextExercise() {
         workoutEngine.startNextExercise()
     }
