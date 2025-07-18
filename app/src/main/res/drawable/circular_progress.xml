@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Фон круга -->
+    <item android:id="@android:id/background">
+        <shape android:shape="ring"
+            android:useLevel="false"
+            android:thickness="10dp"
+            android:innerRadiusRatio="3"
+            android:color="#e0e0e0" />
+    </item>
+
+    <!-- Прогресс круга -->
+    <item android:id="@android:id/progress">
+        <shape android:shape="ring"
+            android:useLevel="true"
+            android:thickness="10dp"
+            android:innerRadiusRatio="3"
+            android:color="#3f51b5" />
+    </item>
+</layer-list>

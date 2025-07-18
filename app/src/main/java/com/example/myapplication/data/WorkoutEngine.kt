@@ -9,13 +9,15 @@ import com.example.myapplication.exercises.AllExercises.workoutExercises
 class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : WorkoutController {
 
     private val exercises: List<Exercise> =
-        workoutExercises[WorkoutKey(workoutId, workoutLvl)] ?: workoutExercises[WorkoutKey(1, 1)]!!
+        workoutExercises[WorkoutKey(workoutId, workoutLvl)]
+            ?: workoutExercises[WorkoutKey(1, 1)]!!
 
     private var currentIndex = 0
     private var remainingTime = 0
     private var isPaused = false
     private var timer: CountDownTimer? = null
     private var stateListener: WorkoutStateListener? = null
+    private var isBackgroundPaused = false // Новое поле для отслеживания паузы из-за сворачивания
 
     fun setStateListener(listener: WorkoutStateListener) {
         this.stateListener = listener
@@ -39,6 +41,7 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
             remainingTime = exercise.durationSeconds
         }
 
+        isPaused = false
         startTimer(remainingTime)
         notifyStateChanged()
     }
@@ -56,103 +59,103 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
 
     private fun startTimer(seconds: Int) {
         timer?.cancel()
-        isPaused = false
-
-        timer = object : CountDownTimer(seconds * 1000L, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                remainingTime = (millisUntilFinished / 1000).toInt()
-                notifyStateChanged()
-            }
-
-            override fun onFinish() {
-                remainingTime = 0
-                currentIndex++
-                if (currentIndex >= exercises.size) {
-                    stateListener?.onWorkoutComplete()
-                } else {
-                    // Показываем rest screen и переходим к следующему упражнению
-                    notifyRestState()
+        // Таймер запускается только если не на паузе
+        if (!isPaused && !isBackgroundPaused) {
+            timer = object : CountDownTimer(seconds * 1000L, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    remainingTime = (millisUntilFinished / 1000).toInt()
+                    notifyStateChanged()
                 }
-            }
-        }.start()
-    }
 
-    private fun notifyRestState() {
-        val nextExercise = exercises[currentIndex]
-        stateListener?.onWorkoutStateChanged(
-            WorkoutViewState(
-                exerciseName = nextExercise.name,
-                gifResourceId = nextExercise.gifResId,
-                timeRemaining = 0,
-                isPlaying = false,
-                totalExercises = exercises.size,
-                currentExerciseIndex = currentIndex + 1,
-                isResting = true
-            )
-        )
-    }
-
-    private fun notifyStateChanged() {
-        val currentExercise =
-            if (currentIndex < exercises.size) exercises[currentIndex] else exercises[0]
-        stateListener?.onWorkoutStateChanged(
-            WorkoutViewState(
-                exerciseName = currentExercise.name,
-                gifResourceId = currentExercise.gifResId,
-                timeRemaining = remainingTime,
-                isPlaying = !isPaused,
-                totalExercises = exercises.size,
-                currentExerciseIndex = currentIndex + 1,
-                isResting = false
-            )
-        )
-    }
-
-    override fun togglePause() {
-        if (isPaused) {
-            // Возобновление таймера
-            startTimer(remainingTime)
-        } else {
-            // Пауза
-            timer?.cancel()
-            isPaused = true
-            notifyStateChanged()
+                override fun onFinish() {
+                    remainingTime = 0
+                    currentIndex++
+                    if (currentIndex >= exercises.size) {
+                        stateListener?.onWorkoutComplete()
+                    } else {
+                        // Запрашиваем отдых перед следующим упражнением
+                        val nextExercise = exercises[currentIndex]
+                        stateListener?.onRestRequired(nextExercise.name)
+                    }
+                }
+            }.start()
         }
     }
 
-    override fun skipExercise() {
+private fun notifyStateChanged() {
+    val currentExercise =
+        if (currentIndex < exercises.size) exercises[currentIndex] else exercises[0]
+    stateListener?.onWorkoutStateChanged(
+        WorkoutViewState(
+            exerciseName = currentExercise.name,
+            gifResourceId = currentExercise.gifResId,
+            timeRemaining = remainingTime,
+            isPlaying = !isPaused && !isBackgroundPaused,
+            totalExercises = exercises.size,
+            currentExerciseIndex = currentIndex + 1,
+            isResting = false
+        )
+    )
+}
+
+override fun togglePause() {
+    if (isPaused) {
+        startTimer(remainingTime)
+    } else {
         timer?.cancel()
-        remainingTime = 0
-        currentIndex++
-        if (currentIndex >= exercises.size) {
-            stateListener?.onWorkoutComplete()
-        } else {
-            // Показываем rest screen перед следующим упражнением
-            notifyRestState()
-        }
+        isPaused = true
+        notifyStateChanged()
     }
+}
 
-    override fun previousExercise() {
-        timer?.cancel()
-
-        // Сброс паузы
+fun resumeWorkout() {
+    if (isPaused && remainingTime > 0) {
         isPaused = false
+        startTimer(remainingTime)
+    }
+}
 
-        // Если мы в начале - просто перезапускаем текущее
-        if (currentIndex == 0) {
-            remainingTime = 0
-            startExercise()
-            return
-        }
+override fun skipExercise() {
+    timer?.cancel()
+    remainingTime = 0
+    currentIndex++
+    if (currentIndex >= exercises.size) {
+        stateListener?.onWorkoutComplete()
+    } else {
+        // Показываем rest screen перед следующим упражнением
+        val nexExercise = exercises[currentIndex]
+        stateListener?.onRestRequired(nexExercise.name)
+    }
+}
 
-        // Переход к предыдущему
-        currentIndex--
+override fun previousExercise() {
+    timer?.cancel()
+
+    // Сброс паузы
+    isPaused = false
+
+    // Если мы в начале - просто перезапускаем текущее
+    if (currentIndex == 0) {
         remainingTime = 0
         startExercise()
+        return
     }
 
-    fun cleanup() {
+    // Переход к предыдущему
+    currentIndex--
+    remainingTime = 0
+    startExercise()
+}
+
+fun pauseWorkout() {
+    if (!isPaused) {
         timer?.cancel()
-        stateListener = null
+        isPaused = true
     }
+}
+
+fun cleanup() {
+    timer?.cancel()
+    stateListener = null
+}
 }

@@ -117,7 +117,6 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/controlsLayout">
 
-        <!-- Тот самый круг -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,31 +127,49 @@
             <TextView
                 android:id="@+id/textRest"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Отдых"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="32sp" />
+
             <TextView
                 android:id="@+id/textTimerCenter"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="10"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="32sp" />
 
-           <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/progressCircular"
-                android:layout_width="261dp"
-                android:layout_height="152dp"
-                app:indicatorColor="@color/light_gray"
-                app:indicatorSize="100dp"
-                android:layout_gravity="center"
-                app:trackColor="@color/colorPrimary"
-                app:trackThickness="15dp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progressCircular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:indicatorColor="@color/light_gray"
+                    app:indicatorSize="100dp"
+                    app:trackColor="@color/black"
+                    app:trackThickness="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <ImageView
+                    android:id="@+id/buttonSkipRest"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/skip_rest"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toEndOf="@id/progressCircular"
+                    app:layout_constraintTop_toTopOf="@id/progressCircular"
+                    app:layout_constraintBottom_toBottomOf="@id/progressCircular"
+                    android:layout_marginStart="16dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </FrameLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
