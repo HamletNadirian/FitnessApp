@@ -9,9 +9,10 @@
         android:id="@+id/historyFragment"
         android:icon="@drawable/outline_bar_chart_24"
         android:title="History" />
-    <!--
+
         <item
-            android:id="@+id/stepCounterFragment"
-            android:icon="@drawable/outline_steps_24"
-            android:title="Steps" />-->
+            android:id="@+id/settingsFragment"
+            android:icon="@drawable/outline_person_24"
+            android:title="My settings" />
+
 </menu>
