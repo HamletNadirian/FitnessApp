@@ -62,17 +62,17 @@ class WorkoutPreviewFragment : Fragment() {
         titleText.text = "${workoutId}-й День"
 
         when (workoutLevel) {
-            1 -> levelBadge.text = "⚡ Новичок"
-            2 -> levelBadge.text = "🔥 Продвинутый"
-            else -> levelBadge.text = "⭐ Уровень $workoutLevel"
+            1 -> levelBadge.text = "⚡ Starter"
+            2 -> levelBadge.text = "🔥 Advanced"
+            else -> levelBadge.text = "⭐ Level $workoutLevel"
         }
 
-        exerciseCount.text = "${exercises.size}\nУпражнения"
+        exerciseCount.text = "${exercises.size}\nExercises"
 
         val totalSeconds = exercises.sumOf { it.durationSeconds }
         val minutes = totalSeconds / 60
         val seconds = totalSeconds % 60
-        totalTime.text = "${minutes} Минут. ${seconds} Секунд. \nВремя"
+        totalTime.text = "${minutes} Minutes. ${seconds} Seconds. \nTime"
 
         // Настройка RecyclerView с упражнениями
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerExercises)

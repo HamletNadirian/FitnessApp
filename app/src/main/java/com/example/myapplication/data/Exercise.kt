@@ -4,6 +4,4 @@ data class Exercise(
     val name: String,
     val durationSeconds: Int,
     val gifResId: Int,
-    val description:String,
-
-    )
+    val description:String)

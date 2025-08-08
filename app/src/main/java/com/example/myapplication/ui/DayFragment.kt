@@ -27,37 +27,37 @@ class DayFragment : Fragment(), OnItemClickListener {
     private var currentSelectedLevel: Int = 1
 
     val items = listOf(
-        FragmentItem("1 - й День", "4 Упражнения", WorkoutFragment::class, 1),
-        FragmentItem("2 - й День", "4 Упражнения", WorkoutFragment::class, 2),
-        FragmentItem("3 - й День", "4 Упражнения", WorkoutFragment::class, 3),
-        FragmentItem("4 - й День", "4 Упражнения", WorkoutFragment::class, 4),
-        FragmentItem("5 - й День", "4 Упражнения", WorkoutFragment::class, 5),
-        FragmentItem("6 - й День", "4 Упражнения", WorkoutFragment::class, 6),
-        FragmentItem("7 - й День", "4 Упражнения", WorkoutFragment::class, 7),
-        FragmentItem("8 - й День", "4 Упражнения", WorkoutFragment::class, 8),
-        FragmentItem("9 - й День", "4 Упражнения", WorkoutFragment::class, 9),
-        FragmentItem("10 - й День", "4 Упражнения", WorkoutFragment::class, 10),
-        FragmentItem("11 - й День", "4 Упражнения", WorkoutFragment::class, 11),
-        FragmentItem("12 - й День", "4 Упражнения", WorkoutFragment::class, 12),
-        FragmentItem("13 - й День", "4 Упражнения", WorkoutFragment::class, 13),
-        FragmentItem("14 - й День", "4 Упражнения", WorkoutFragment::class, 14)
+        FragmentItem("1st Day", "4 Exercises", WorkoutFragment::class, 1),
+        FragmentItem("2nd Day", "4 Exercises", WorkoutFragment::class, 2),
+        FragmentItem("3rd Day", "4 Exercises", WorkoutFragment::class, 3),
+        FragmentItem("4th Day", "4 Exercises", WorkoutFragment::class, 4),
+        FragmentItem("5th Day", "4 Exercises", WorkoutFragment::class, 5),
+        FragmentItem("6th Day", "4 Exercises", WorkoutFragment::class, 6),
+        FragmentItem("7th Day", "4 Exercises", WorkoutFragment::class, 7),
+        FragmentItem("8th Day", "4 Exercises", WorkoutFragment::class, 8),
+        FragmentItem("9th Day", "4 Exercises", WorkoutFragment::class, 9),
+        FragmentItem("10th Day", "4 Exercises", WorkoutFragment::class, 10),
+        FragmentItem("11th Day", "4 Exercises", WorkoutFragment::class, 11),
+        FragmentItem("12th Day", "4 Exercises", WorkoutFragment::class, 12),
+        FragmentItem("13th Day", "4 Exercises", WorkoutFragment::class, 13),
+        FragmentItem("14th Day", "4 Exercises", WorkoutFragment::class, 14)
     )
 
     val items2 = listOf(
-        FragmentItem("1 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 1),
-        FragmentItem("2 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 2),
-        FragmentItem("3 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 3),
-        FragmentItem("4 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 4),
-        FragmentItem("5 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 5),
-        FragmentItem("6 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 6),
-        FragmentItem("7 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 7),
-        FragmentItem("8 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 8),
-        FragmentItem("9 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 9),
-        FragmentItem("10 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 10),
-        FragmentItem("11 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 11),
-        FragmentItem("12 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 12),
-        FragmentItem("13 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 13),
-        FragmentItem("14 - й День. Уровень №2", "4 Упражнения", WorkoutFragment::class, 14)
+        FragmentItem("1st Day. Level №2", "4 Exercises", WorkoutFragment::class, 1),
+        FragmentItem("2nd Day. Level №2", "4 Exercises", WorkoutFragment::class, 2),
+        FragmentItem("3rd Day. Level №2", "4 Exercises", WorkoutFragment::class, 3),
+        FragmentItem("4th Day. Level №2", "4 Exercises", WorkoutFragment::class, 4),
+        FragmentItem("5th Day. Level №2", "4 Exercises", WorkoutFragment::class, 5),
+        FragmentItem("6th Day. Level №2", "4 Exercises", WorkoutFragment::class, 6),
+        FragmentItem("7th Day. Level №2", "4 Exercises", WorkoutFragment::class, 7),
+        FragmentItem("8th Day. Level №2", "4 Exercises", WorkoutFragment::class, 8),
+        FragmentItem("9th Day. Level №2", "4 Exercises", WorkoutFragment::class, 9),
+        FragmentItem("10th Day. Level №2", "4 Exercises", WorkoutFragment::class, 10),
+        FragmentItem("11th Day. Level №2", "4 Exercises", WorkoutFragment::class, 11),
+        FragmentItem("12th Day. Level №2", "4 Exercises", WorkoutFragment::class, 12),
+        FragmentItem("13th Day. Level №2", "4 Exercises", WorkoutFragment::class, 13),
+        FragmentItem("14th Day. Level №2", "4 Exercises", WorkoutFragment::class, 14)
     )
 
     private val categories = listOf(
@@ -78,7 +78,7 @@ class DayFragment : Fragment(), OnItemClickListener {
         val tabLayoutMediator =
             TabLayoutMediator(tabLayout, viewPager, object : TabConfigurationStrategy {
                 override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-                    tab.setText("Уровень " + (position + 1))
+                    tab.setText("Level " + (position + 1))
                 }
             })
         tabLayoutMediator.attach()

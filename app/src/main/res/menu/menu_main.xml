@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/dayFragment"
-        android:icon="@drawable/outline_sports_gymnastics_24"
-        android:title="Inbox" />
+        android:icon="@drawable/outline_exercise_24"
+        android:title="Exercise" />
 
     <item
         android:id="@+id/historyFragment"

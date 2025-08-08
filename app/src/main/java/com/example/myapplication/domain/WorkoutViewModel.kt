@@ -91,6 +91,16 @@ class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) 
             startRestTimer()
         }
     }
+    fun pauseForBackground() {
+        workoutEngine.pauseForBackground()
+        pauseRest()
+    }
+
+    fun resumeForBackground() {
+        workoutEngine.resumeWorkout()
+        resumeRest()
+    }
+
 
     // Методы для управления всей тренировкой при сворачивании
     fun pauseWorkout() {

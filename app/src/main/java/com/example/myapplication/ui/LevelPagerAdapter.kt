@@ -14,6 +14,14 @@ class LevelPagerAdapter(
     override fun getItemCount(): Int = categories.size
 
     override fun createFragment(position: Int): Fragment {
-        return LevelPageFragment.newInstance(categories[position], clickListener)
+        val workoutLevel = categories[position]
+        // Используем ID из WorkoutLevel как номер уровня
+        val levelNumber = workoutLevel.id
+
+        return LevelPageFragment.newInstance(
+            workoutLevel,
+            clickListener,
+            levelNumber
+        )
     }
 }

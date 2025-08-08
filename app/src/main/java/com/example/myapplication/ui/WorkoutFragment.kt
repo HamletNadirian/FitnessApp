@@ -160,7 +160,7 @@ class WorkoutFragment : Fragment() {
 
         progressCircular = view.findViewById(R.id.progressCircular)
         textTimerCenter = view.findViewById(R.id.textTimerCenter)
-        buttonSkipRest = view.findViewById(R.id.buttonSkipRest) // Добавьте эту кнопку в layout
+        buttonSkipRest = view.findViewById(R.id.buttonSkipRest)
 
     }
 

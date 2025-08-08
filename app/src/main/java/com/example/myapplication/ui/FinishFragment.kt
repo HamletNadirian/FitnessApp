@@ -45,7 +45,7 @@ class FinishFragment : Fragment() {
         val btnBackToList = view?.findViewById<Button>(R.id.btnBackToList)
 
         // Устанавливаем сообщение о завершенной тренировке
-        tvWorkoutCompleted?.text = "Тренировка успешно завершена!"
+        tvWorkoutCompleted?.text = "The training was successfully completed!"
         saveCompletedWorkout()
 
         //addDatetoDatabase(historyDao)
@@ -98,14 +98,14 @@ class FinishFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
                         requireContext(),
-                        "Тренировка сохранена!",
+                        "Workout saved!",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             } catch (e: Exception) {
                 Log.e("FinishFragment", "Error saving workout", e)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Ошибка сохранения", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "Saving error", Toast.LENGTH_SHORT)
                         .show()
                 }
             }

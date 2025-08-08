@@ -1,6 +1,7 @@
 package com.example.myapplication.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +17,22 @@ import com.example.myapplication.data.WorkoutLevel
 class LevelPageFragment : Fragment() {
     private lateinit var workoutLevel: WorkoutLevel
     private lateinit var clickListener: OnItemClickListener
+    private var adapter: CustomAdapter? = null
+    private var levelNumber: Int = 1
 
     companion object {
 
         fun newInstance(
             workoutLevel: WorkoutLevel,
-            clickListener: OnItemClickListener
+            clickListener: OnItemClickListener,
+            levelNumber: Int = 1
+
         ): LevelPageFragment {
             val fragment = LevelPageFragment()
             fragment.workoutLevel = workoutLevel
             fragment.clickListener = clickListener
+            fragment.levelNumber = levelNumber
+
             return fragment
         }
     }
@@ -44,7 +51,9 @@ class LevelPageFragment : Fragment() {
         // Настройка RecyclerView с тренировками
         val recyclerView = view.findViewById<RecyclerView>(R.id.workoutRecyclerView)
         val historyDao = (requireActivity().application as WorkoutApp).db.HistoryDao()
-        val adapter = CustomAdapter(workoutLevel.workouts, historyDao, this, clickListener)
+
+        adapter = CustomAdapter(workoutLevel.workouts, historyDao, this, clickListener)
+        adapter?.updateCurrentLevel(levelNumber)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
@@ -54,4 +63,11 @@ class LevelPageFragment : Fragment() {
 
         return view
     }
+
+    override fun onResume() {
+        super.onResume()
+        // Обновляем уровень при возврате к фрагменту (на случай, если что-то изменилось)
+        adapter?.updateCurrentLevel(levelNumber)
+    }
+
 }

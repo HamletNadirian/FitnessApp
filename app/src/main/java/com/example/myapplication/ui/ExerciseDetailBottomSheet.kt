@@ -53,7 +53,7 @@ class ExerciseDetailBottomSheet : BottomSheetDialogFragment() {
         arguments?.let {
             tvName.text = it.getString(ARG_NAME)
             tvDescription.text = it.getString(ARG_DESCRIPTION)
-            tvDuration.text = "${it.getInt(ARG_DURATION)} секунд"
+            tvDuration.text = "${it.getInt(ARG_DURATION)} secunds"
             val gifResId = it.getInt(ARG_GIF_RES_ID)
             if (gifResId != 0) {
                 Glide.with(this)
