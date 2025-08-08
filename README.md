@@ -10,12 +10,5 @@ Screenshots.
 </p>
 
 📌 TODO
-
- Adding workouts.
-
- Adding levels.
-
- Adding the " I am " Screen.
-
- Implementation of a step-counter.
+https://trello.com/b/mD09mBNz/app
 
