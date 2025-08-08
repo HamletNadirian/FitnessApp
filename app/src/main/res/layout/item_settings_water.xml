@@ -21,7 +21,7 @@
         android:layout_marginStart="12dp"
         android:layout_weight="1"
         android:textColor="@color/black"
-        android:text="Напоминание питья воды"
+        android:text="Reminder to drink water"
         android:textSize="16sp"/>
 
 </LinearLayout>

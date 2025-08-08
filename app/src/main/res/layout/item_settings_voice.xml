@@ -21,7 +21,7 @@
         android:layout_marginStart="12dp"
         android:layout_weight="1"
         android:textColor="@color/black"
-        android:text="Настроить голос"
+        android:text="Coach voice (Device TTS Engine)"
         android:textSize="16sp"/>
 
 </LinearLayout>

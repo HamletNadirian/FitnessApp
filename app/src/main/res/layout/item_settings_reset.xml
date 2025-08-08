@@ -21,7 +21,7 @@
         android:layout_marginStart="12dp"
         android:layout_weight="1"
         android:textColor="@color/black"
-        android:text="Сброс тренировок"
+        android:text="Restart progress"
         android:textSize="16sp"/>
 
 </LinearLayout>

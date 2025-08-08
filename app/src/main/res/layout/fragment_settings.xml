@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
-            android:text="Я"
+            android:text="I'm"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
-            android:text="РАЗМИНКА"
+            android:text="WORKOUT"
             android:textAllCaps="true"
 
             android:textColor="@color/black"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="24dp"
             android:paddingBottom="8dp"
-            android:text="ОБЩИЕ НАСТРОЙКИ"
+            android:text="GENERAL SETTINGS"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="14sp"
