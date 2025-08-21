@@ -81,6 +81,12 @@ class WorkoutFragment : Fragment() {
 
         // Наблюдение за состоянием тренировки
         observeViewStates()
+        savedInstanceState?.let {
+            val isUserPaused = it.getBoolean("isUserPaused", false)
+            if (isUserPaused) {
+                viewModel.pauseWorkout()
+            }
+        }
     }
 
     private fun observeViewStates() {
@@ -164,34 +170,9 @@ class WorkoutFragment : Fragment() {
 
     }
 
-    // Исправленный метод для showRestScreenAndStartExercise
- /*   private fun showRestScreenAndStartExercise(onFinish: () -> Unit) {
-        restScreen.visibility = View.VISIBLE
-        // Устанавливаем максимальное значение прогресс-бара
-        progressCircular.max = 10
-        progressCircular.progress = 10
-
-
-        lifecycleScope.launch {
-            for (time in 10 downTo 1) {
-                progressCircular.progress = time
-                textTimerCenter.text = time.toString()
-                delay(1000)
-            }
-            progressCircular.progress = 0
-            textTimerCenter.text = "0"
-            delay(100)
-
-            restScreen.visibility = View.GONE
-            onFinish()
-        }
-    }*/
-
     private fun speakOut(text: String) {
         tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
-
-
 
     private fun setupControllers() {
         buttonPause.setOnClickListener {
@@ -245,13 +226,21 @@ class WorkoutFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         // Приостанавливаем всю тренировку при сворачивании
-        viewModel.pauseWorkout()
+        viewModel.pauseForBackground()
+        Log.d("WorkoutFragment", "onPause: paused for background")
+
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("isUserPaused", viewModel.isUserPaused)
     }
 
     override fun onResume() {
         super.onResume()
         // Возобновляем всю тренировку при возврате в приложение
-        viewModel.resumeWorkout()
+        viewModel.resumeForBackground()
+        Log.d("WorkoutFragment", "onResume: resumed from background")
+
     }
 
     override fun onDestroyView() {
@@ -259,5 +248,17 @@ class WorkoutFragment : Fragment() {
         tts?.stop()
         tts?.shutdown()
         tts = null
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.resumeWorkout()
+        Log.d("WorkoutFragment", "onStart: workout resumed")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.pauseWorkout()
+        Log.d("WorkoutFragment", "onStop: workout paused")
     }
 }

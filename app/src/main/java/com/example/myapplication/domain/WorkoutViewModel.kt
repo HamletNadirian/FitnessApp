@@ -24,7 +24,7 @@ class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) 
     private var remainingRestTime = 0
     private var isRestPaused = false
     private val REST_DURATION = 10 // секунды
-
+    var isUserPaused = false // Новая переменная для отслеживания пользовательской паузы
     init {
         workoutEngine.setStateListener(object : WorkoutStateListener {
             override fun onWorkoutStateChanged(state: WorkoutViewState) {
@@ -92,18 +92,23 @@ class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) 
         }
     }
     fun pauseForBackground() {
-        workoutEngine.pauseForBackground()
-        pauseRest()
+        if (!isUserPaused) { // Пауза только если пользователь не поставил на паузу
+            workoutEngine.pauseForBackground()
+            pauseRest()
+        }
     }
 
     fun resumeForBackground() {
-        workoutEngine.resumeWorkout()
-        resumeRest()
+        if (!isUserPaused) { // Возобновляем только если не на паузе от пользователя
+            workoutEngine.resumeWorkout()
+            resumeRest()
+        }
     }
 
 
     // Методы для управления всей тренировкой при сворачивании
     fun pauseWorkout() {
+        isUserPaused = true
         // Останавливаем основной таймер тренировки
         workoutEngine.pauseWorkout()
         // Останавливаем отдых
@@ -111,6 +116,7 @@ class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) 
     }
 
     fun resumeWorkout() {
+        isUserPaused = false
         // Возобновляем основной таймер тренировки
         workoutEngine.resumeWorkout()
         // Возобновляем отдых
@@ -125,6 +131,7 @@ class WorkoutViewModel(private val workoutId: Int, private val workoutLvl: Int) 
 
     // Методы для управления тренировкой
     fun togglePause() {
+        isUserPaused = !isUserPaused
         workoutEngine.togglePause()
     }
 

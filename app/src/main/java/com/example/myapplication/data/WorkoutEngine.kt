@@ -111,6 +111,9 @@ class WorkoutEngine(private val workoutId: Int, private val workoutLvl: Int) : W
     }
 
     fun resumeWorkout() {
+        if (isPaused && !isBackgroundPaused) {
+            return // Не возобновляем, если тренировка на паузе от пользователя
+        }
         if ((isPaused || isBackgroundPaused) && remainingTime > 0) {
             isPaused = false
             isBackgroundPaused = false
