@@ -31,6 +31,11 @@ class SettingsFragment : Fragment() {
         myProfileLayout.setOnClickListener {
             findNavController().navigate(R.id.action_settings_to_profile)
         }
+        val reminderLayout = view.findViewById<View>(R.id.my_reminder_layout)
+        reminderLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_reminderFragment)
+        }
+
     }
 
 }

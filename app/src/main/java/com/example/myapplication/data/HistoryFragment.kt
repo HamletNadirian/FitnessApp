@@ -63,7 +63,7 @@ class HistoryFragment : Fragment() {
                             showEventDialog(events)
                         }
                     } else {
-                        binding.calendarView.visibility = View.GONE
+                       // binding.calendarView.visibility = View.GONE
                     }
                 }
             }
