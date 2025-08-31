@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt") // ← вот сюда добавляешь, если используешь Glide compiler
+    id("kotlin-kapt") //
     alias(libs.plugins.androidx.navigation.safe.args)
 
 }
@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.lottie)
     implementation(libs.material.calendarview)
     implementation(libs.core.splashscreen)
     implementation(libs.navigation.fragment.ktx)

@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/dayFragment"
+    >
+<!--    app:startDestination="@id/welcomeFragment"-->
+
+
     <fragment
         android:id="@+id/workoutFragment"
         android:name="com.example.myapplication.ui.WorkoutFragment"
@@ -47,7 +51,7 @@
             android:id="@+id/action_finishFragment_to_dayFragment"
             app:destination="@id/dayFragment" />
     </fragment>
-    <fragment
+  <!--  <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.myapplication.ui.WelcomeFragment"
         android:label="fragment_welcome"
@@ -55,7 +59,7 @@
         <action
             android:id="@+id/action_welcomeFragment_to_dayFragment"
             app:destination="@id/dayFragment" />
-    </fragment>
+    </fragment>-->
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.myapplication.data.HistoryFragment"
