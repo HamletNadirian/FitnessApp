@@ -48,7 +48,7 @@ class ProfileFragment : Fragment() {
          }
     }
 
-    private fun showHeightDialog() {
+     fun showHeightDialog() {
         val inflater = layoutInflater
         val dialogView = inflater.inflate(R.layout.dialog_height, null)
 

@@ -1,7 +1,8 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/my_reminder_layout"
+    android:id="@+id/my_training_reminder_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -25,5 +26,11 @@
         android:text="Reminder"
         android:textSize="16sp"/>
 
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_train_reminder"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:checked="true"
+        android:enabled="true" />
 </LinearLayout>
 </merge>

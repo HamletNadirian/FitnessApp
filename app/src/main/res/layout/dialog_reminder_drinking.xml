@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Reminder about Water"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Frequency of reminders"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <!-- NumberPicker для килограммов -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="32dp">
+
+        <NumberPicker
+            android:id="@+id/hourPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:descendantFocusability="blocksDescendants" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Recommended quantity of litres"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="32dp">
+
+        <NumberPicker
+            android:id="@+id/literPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:descendantFocusability="blocksDescendants" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="16dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_rounded_gray"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:text="CANCEL"
+            android:textColor="@color/buttonLabel" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounded_blue"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:text="SAVE"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

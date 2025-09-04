@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -12,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.airbnb.lottie.LottieAnimationView
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

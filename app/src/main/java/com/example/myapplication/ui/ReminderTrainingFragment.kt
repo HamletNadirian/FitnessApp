@@ -8,22 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.NumberPicker
-import android.widget.TextView
 import android.widget.TimePicker
-import android.widget.Toast
 import com.example.myapplication.R
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-class ReminderFragment : Fragment() {
+class ReminderTrainingFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reminder, container, false)
+        return inflater.inflate(R.layout.fragment_training_reminder, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,7 +54,7 @@ class ReminderFragment : Fragment() {
 
             Log.d("Chips", "Выбраны: $selected")
 
-            // TODO: положи selected в свою переменную / передай во ViewModel
+            // TODO: положить selected в свою переменную / передать во ViewModel
             dialog.dismiss()
         }
 

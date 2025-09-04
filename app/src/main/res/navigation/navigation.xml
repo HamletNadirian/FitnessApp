@@ -109,6 +109,6 @@
         android:label="Profile" />
     <fragment
         android:id="@+id/reminderFragment"
-        android:name="com.example.myapplication.ui.ReminderFragment"
+        android:name="com.example.myapplication.ui.ReminderTrainingFragment"
         android:label="ReminderFragment" />
 </navigation>
