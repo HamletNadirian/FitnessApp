@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="12dp"
+    android:id="@+id/item_settings_rate"
     android:background="@android:color/white"
     android:gravity="center_vertical">
 

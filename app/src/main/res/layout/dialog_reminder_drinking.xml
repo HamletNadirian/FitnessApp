@@ -35,7 +35,6 @@
             android:id="@+id/hourPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:descendantFocusability="blocksDescendants" />
@@ -62,7 +61,6 @@
             android:id="@+id/literPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:descendantFocusability="blocksDescendants" />

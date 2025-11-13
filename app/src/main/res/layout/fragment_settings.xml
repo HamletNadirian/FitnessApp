@@ -59,8 +59,6 @@
 
         <include layout="@layout/item_settings_reset" />
 
-        <include layout="@layout/item_settings_voice" />
-
         <!-- Раздел: Поддержите нас -->
         <TextView
             android:layout_width="wrap_content"

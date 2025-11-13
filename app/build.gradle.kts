@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.lottie)
     implementation(libs.material.calendarview)
     implementation(libs.core.splashscreen)
